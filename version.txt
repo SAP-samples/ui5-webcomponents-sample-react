@@ -1,5 +1,5 @@
-commit a3c8e24aa685be17bf7a734b9e2e3bb66665d371
-Author: Vladislav Tasev <vladislav.tasev@sap.com>
-Date:   Mon Feb 18 13:49:45 2019 +0200
+commit 6d86c5659d6c19867a7096db7846ace0ffd5b02e
+Author: Adrian Bobev <adrian.bobev@sap.com>
+Date:   Thu Feb 21 17:33:15 2019 +0200
 
-    upadte
+    chore: enable auto deploy to gh-pages (#1)
