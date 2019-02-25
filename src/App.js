@@ -3,6 +3,7 @@ import logo from './logo.png';
 import './App.css';
 import TodoList from './TodoList';
 
+import "@ui5/webcomponents-base/src/sap/ui/webcomponents/base/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Toolbar";
 import "@ui5/webcomponents/dist/Title";

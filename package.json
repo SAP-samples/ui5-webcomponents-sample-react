@@ -6,7 +6,7 @@
   "dependencies": {
     "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
-    "@ui5/webcomponents": "^0.7.0",
+    "@ui5/webcomponents": "^0.8.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
