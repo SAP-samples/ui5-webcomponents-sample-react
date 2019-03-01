@@ -1,5 +1,5 @@
-commit 6d86c5659d6c19867a7096db7846ace0ffd5b02e
-Author: Adrian Bobev <adrian.bobev@sap.com>
-Date:   Thu Feb 21 17:33:15 2019 +0200
+commit e0d72760c2ea367035721c9c9a7b6665eb7c6d07
+Author: Adrian Bobev <adrian.bobev@gmail.com>
+Date:   Fri Mar 1 17:39:31 2019 +0200
 
-    chore: enable auto deploy to gh-pages (#1)
+    chore: update ui5-webcomponents version (#3)
