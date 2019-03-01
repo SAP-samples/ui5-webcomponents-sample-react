@@ -447,7 +447,7 @@ module.exports = function(webpackEnv) {
               ),
             },
             {
-              test: /cldr\/.*\.json$/,
+              test: [/cldr\/.*\.json$/, /i18n\/.*\.json$/],
               loader: 'file-loader',
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',

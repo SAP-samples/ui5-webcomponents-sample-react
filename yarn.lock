@@ -869,27 +869,29 @@
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
   integrity sha512-42zEJkBpNfMEAvWR5WlwtTH22oDzcMjFsL9gDGExwF8X8WvAiw7Vwop7hPw03QT8TKfec83LwbHj6SvpqM4ELQ==
 
-"@ui5/webcomponents-base@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-base/-/webcomponents-base-0.7.0.tgz#b9fa4ab1a745f257aa92d2a395be537294a2a8be"
-  integrity sha512-lpW0OFhbOdspxm3pBK+BxsVs0ylZFBiNNuTvD0khq6HH/IiIKwPj2qbffCpU1AMxmPjBC0I+0MqqmtYOMBRz3Q==
+"@ui5/webcomponents-base@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-base/-/webcomponents-base-0.8.0.tgz#63ffc56beb6090bbebaf2ff423547dde198c184c"
+  integrity sha512-Dlv9dTKeF/InWjHy1DmJc1lamxyaG4o8Q2wpg+tPV3aNdNhjO5Wu+lswFigVYDO4oMdg3I5qdN8kbMtJJkLh+A==
   dependencies:
     "@polymer/polymer" "^3.1.0"
-    "@ui5/webcomponents-core" "0.7.0"
+    "@ui5/webcomponents-core" "^0.8.0"
+    lit-html "^1.0.0"
+    regenerator-runtime "0.12.1"
+    url-search-params-polyfill "^5.0.0"
 
-"@ui5/webcomponents-core@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-core/-/webcomponents-core-0.7.0.tgz#f5aaf4403d9ed5933180cd517c78875cc6087707"
-  integrity sha512-Cf6YbcQN3NEGuWG/5YA75DJ0jlI0y1u9TO6I1U1nsbJoFnApOrR/5RihgqyOAVcX/IreTnBI8KXJYa4fkU6BSw==
+"@ui5/webcomponents-core@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-core/-/webcomponents-core-0.8.0.tgz#a67dc76740b05c4440b3058036edc5c22fa0990f"
+  integrity sha512-J34eOnGqbE71MXp7vilrCpq7yfhUTh4XCeLe2dt2YtH72V5uFNSUc1s3nsrG/lQyb4gFrdN/dEJTDJ9HuGPq0w==
 
-"@ui5/webcomponents@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents/-/webcomponents-0.7.0.tgz#b297f7b44ffffc129064618b063d4e06f9ad51e5"
-  integrity sha512-Mx7mvJiYMVODFe9wc6fO5hSa4QIR3XK639+ei8b0Hibr4HS0dL8SmUuYoxhx1oGVnKWspBXCxIN/3Bh8SLCr2A==
+"@ui5/webcomponents@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents/-/webcomponents-0.8.0.tgz#1027ef848e5f57e6d935e2e458567a3e419aefaa"
+  integrity sha512-XtN4PhOpMq07hloQWwopvVpcQhC4ILaAKz3j/dssdcNvUIC5wrCdzqJe7PA2xqU5jc3V5lNOpv/W/uxCjHEEPQ==
   dependencies:
-    "@ui5/webcomponents-base" "0.7.0"
-    "@ui5/webcomponents-core" "0.7.0"
-    lit-html "^0.14.0"
+    "@ui5/webcomponents-base" "^0.8.0"
+    "@ui5/webcomponents-core" "^0.8.0"
 
 "@webassemblyjs/ast@1.7.6":
   version "1.7.6"
@@ -5720,10 +5722,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lit-html@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.14.0.tgz#d6830e8f55fb923b0f5824decf7da082a1d22997"
-  integrity sha512-+xqUPzzJGEDqb0F5DOnMXvL0jxpkKebAMlXycKZxFtzlmD+qePEmYrEUPF9XVXcc5eYBzYXTCOUcjSCod4YvgQ==
+lit-html@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.0.0.tgz#3dc3781a8ca68a9b5c2ff2a61e263662b9b2267b"
+  integrity sha512-oeWlpLmBW3gFl7979Wol2LKITpmKTUFNn7PnFbh6YNynF61W74l6x5WhwItAwPRSATpexaX1egNnRzlN4GOtfQ==
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -7972,15 +7974,15 @@ regenerate@^1.2.1, regenerate@^1.4.0:
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
   integrity sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg==
 
+regenerator-runtime@0.12.1, regenerator-runtime@^0.12.0:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
+  integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
+
 regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
-
-regenerator-runtime@^0.12.0:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
-  integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
 
 regenerator-transform@^0.13.3:
   version "0.13.3"
@@ -9345,6 +9347,11 @@ url-parse@^1.4.3:
   dependencies:
     querystringify "^2.0.0"
     requires-port "^1.0.0"
+
+url-search-params-polyfill@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/url-search-params-polyfill/-/url-search-params-polyfill-5.0.0.tgz#09b98337c89dcf6c6a6a0bfeb096f6ba83b7526b"
+  integrity sha512-+SCD22QJp4UnqPOI5UTTR0Ljuh8cHbjEf1lIiZrZ8nHTlTixqwVsVQTSfk5vrmDz7N09/Y+ka5jQr0ff35FnQQ==
 
 url@^0.11.0:
   version "0.11.0"
