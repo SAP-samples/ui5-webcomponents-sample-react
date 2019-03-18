@@ -869,29 +869,29 @@
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
   integrity sha512-42zEJkBpNfMEAvWR5WlwtTH22oDzcMjFsL9gDGExwF8X8WvAiw7Vwop7hPw03QT8TKfec83LwbHj6SvpqM4ELQ==
 
-"@ui5/webcomponents-base@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-base/-/webcomponents-base-0.8.0.tgz#63ffc56beb6090bbebaf2ff423547dde198c184c"
-  integrity sha512-Dlv9dTKeF/InWjHy1DmJc1lamxyaG4o8Q2wpg+tPV3aNdNhjO5Wu+lswFigVYDO4oMdg3I5qdN8kbMtJJkLh+A==
+"@ui5/webcomponents-base@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-base/-/webcomponents-base-0.9.0.tgz#28742bdb7af90ae1f731d314e3fd167442e12021"
+  integrity sha512-mIEfxPNzSUNzVJ1IIl4YPOAPIhQvihzKp4AH8qnBP/AUYEO2RlJVvBmYnQ3akKXKr1Czgs5JolyfcnR0tbG6OA==
   dependencies:
     "@polymer/polymer" "^3.1.0"
-    "@ui5/webcomponents-core" "^0.8.0"
+    "@ui5/webcomponents-core" "0.9.0"
     lit-html "^1.0.0"
     regenerator-runtime "0.12.1"
     url-search-params-polyfill "^5.0.0"
 
-"@ui5/webcomponents-core@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-core/-/webcomponents-core-0.8.0.tgz#a67dc76740b05c4440b3058036edc5c22fa0990f"
-  integrity sha512-J34eOnGqbE71MXp7vilrCpq7yfhUTh4XCeLe2dt2YtH72V5uFNSUc1s3nsrG/lQyb4gFrdN/dEJTDJ9HuGPq0w==
+"@ui5/webcomponents-core@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-core/-/webcomponents-core-0.9.0.tgz#05b7ed388771be204f548b560722f84b69eb892f"
+  integrity sha512-i+qjcKzwmGFmr7Re6hkaItHVfrhTdfZM4Ef7GKo976jhX1TxOtFAws1xVOV9B3sJjP9fbOOIX+dE7t3p2QE3ow==
 
-"@ui5/webcomponents@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents/-/webcomponents-0.8.0.tgz#1027ef848e5f57e6d935e2e458567a3e419aefaa"
-  integrity sha512-XtN4PhOpMq07hloQWwopvVpcQhC4ILaAKz3j/dssdcNvUIC5wrCdzqJe7PA2xqU5jc3V5lNOpv/W/uxCjHEEPQ==
+"@ui5/webcomponents@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents/-/webcomponents-0.9.0.tgz#e91dd2aa698bbc7780f6e4e58ba30011c823e15e"
+  integrity sha512-O0vL3gIVCIfs3X2iFmWUe21jUqaEh060vZ5g3dtcwKvC+uwZB3ucRjHSwFm3rF138io2cqL4ucGEjurOVj0gGw==
   dependencies:
-    "@ui5/webcomponents-base" "^0.8.0"
-    "@ui5/webcomponents-core" "^0.8.0"
+    "@ui5/webcomponents-base" "0.9.0"
+    "@ui5/webcomponents-core" "0.9.0"
 
 "@webassemblyjs/ast@1.7.6":
   version "1.7.6"
