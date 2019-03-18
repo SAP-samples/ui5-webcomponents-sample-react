@@ -86,7 +86,7 @@
 
 @media(max-width: 600px) {
   .create-todo-wrapper {
-     lex-direction: column;
+    flex-direction: column;
   }
 
   .add-todo-element-width  {
