@@ -23,7 +23,7 @@ class TodoItem extends Component {
     return (
       <ui5-li-custom key={this.props.id} selected={this.props.done || undefined} data-key={this.props.id} class={this.props.hidden ? "hidden" : ""}>
         <div className="li-content">
-          <span>{this.props.text} - finish before: {this.props.deadline}</span>
+          <span className="li-content-text">{this.props.text} - finish before: {this.props.deadline}</span>
           <div className="li-content-actions">
             <ui5-button class="edit-btn" ref={this.edit}>Edit</ui5-button>
             <ui5-button type="Negative" ref={this.delete}>Delete</ui5-button>

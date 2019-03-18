@@ -34,7 +34,7 @@
   box-sizing: border-box;
 }
 
-.auto-width {
+.add-todo-element-width {
   width: auto;
 }
 
@@ -43,7 +43,7 @@
 }
 
 #date-picker {
-  margin: 0 0.5rem;
+  margin: 0 0.5rem 0 0.5rem;
 }
 
 .li-content {
@@ -53,12 +53,18 @@
   align-items: center;
 }
 
+.li-content-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .edit-btn {
   margin-right: 1rem;
 }
 
 .dialog-content {
-  width: 320px;
+  max-width: 320px;
   padding: 2rem 2rem;
 }
 
@@ -76,4 +82,18 @@
 
 .date-edit-fields {
   margin-top: 1rem;
+}
+
+@media(max-width: 600px) {
+  .create-todo-wrapper {
+    flex-direction: column;
+  }
+
+  .add-todo-element-width  {
+    width: 100%;
+  }
+
+  #date-picker {
+    margin: 0.5rem 0 0.5rem 0;
+  }
 }
