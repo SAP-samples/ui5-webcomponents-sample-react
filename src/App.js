@@ -184,9 +184,9 @@ class App extends Component {
         </header>
         <section className="app-content">
           <div className="create-todo-wrapper">
-            <ui5-input placeholder="My Todo ..." ref={this.todoInput} class="auto-width" id="add-input"></ui5-input>
-            <ui5-datepicker format-pattern="dd/MM/yyyy" class="auto-width" ref={this.todoDeadline} id="date-picker"></ui5-datepicker>
-            <ui5-button class="auto-width" ref={this.addButton} type="Emphasized">Add Todo</ui5-button>
+            <ui5-input placeholder="My Todo ..." ref={this.todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
+            <ui5-datepicker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={this.todoDeadline} id="date-picker"></ui5-datepicker>
+            <ui5-button class="add-todo-element-width" ref={this.addButton} type="Emphasized">Add Todo</ui5-button>
           </div>
 
           <div className="list-todos-wrapper">
