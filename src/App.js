@@ -5,7 +5,7 @@ import TodoList from './TodoList';
 
 import "@ui5/webcomponents-base/src/sap/ui/webcomponents/base/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
-import "@ui5/webcomponents/dist/Toolbar";
+import "@ui5/webcomponents/dist/ShellBar";
 import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
@@ -71,6 +71,10 @@ class App extends Component {
 
   componentDidMount() {
     this.addButton.current.addEventListener('press', event => {
+      this.handleAdd();
+    });
+
+    this.todoInput.current.addEventListener('submit', event => {
       this.handleAdd();
     });
 
@@ -176,12 +180,10 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <header className="app-header">
-          <ui5-toolbar class="header-toolbar">
-            <img src={logo} alt="UI5 Logo" className="ui5-logo" />
-            <ui5-title class="app-title">UI5 Web Components React Sample Application</ui5-title>
-          </ui5-toolbar>
-        </header>
+        <ui5-shellbar
+          primary-title="UI5 Web Components React Sample Application"
+          logo={logo}>
+        </ui5-shellbar>
         <section className="app-content">
           <div className="create-todo-wrapper">
             <ui5-input placeholder="My Todo ..." ref={this.todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
