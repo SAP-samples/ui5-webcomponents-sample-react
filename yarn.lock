@@ -827,13 +827,6 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@polymer/polymer@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.1.0.tgz#3e1b7447a1e350fd654e1823def655d0f0828a70"
-  integrity sha512-hwN8IMERsFATz/9dSMxYHL+84J9uBkPuuarxJWlTsppZ4CAYTZKnepBfNrKoyNsafBmA3yXBiiKPPf+fJtza7A==
-  dependencies:
-    "@webcomponents/shadycss" "^1.5.2"
-
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"
@@ -869,29 +862,28 @@
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
   integrity sha512-42zEJkBpNfMEAvWR5WlwtTH22oDzcMjFsL9gDGExwF8X8WvAiw7Vwop7hPw03QT8TKfec83LwbHj6SvpqM4ELQ==
 
-"@ui5/webcomponents-base@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-base/-/webcomponents-base-0.9.0.tgz#28742bdb7af90ae1f731d314e3fd167442e12021"
-  integrity sha512-mIEfxPNzSUNzVJ1IIl4YPOAPIhQvihzKp4AH8qnBP/AUYEO2RlJVvBmYnQ3akKXKr1Czgs5JolyfcnR0tbG6OA==
+"@ui5/webcomponents-base@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-base/-/webcomponents-base-0.10.0.tgz#81e22938c8b34c58d48e6234d472cdb55ca80c90"
+  integrity sha512-5hVXvXF+jJjdqneWB2AQ/toGrPnTFhEistBM0WcJ64e+8JqSvDP8/Kfk0TRG7Qudoau5np9JqxhJ3NLY4Vs5DA==
   dependencies:
-    "@polymer/polymer" "^3.1.0"
-    "@ui5/webcomponents-core" "0.9.0"
+    "@ui5/webcomponents-core" "0.10.0"
     lit-html "^1.0.0"
     regenerator-runtime "0.12.1"
     url-search-params-polyfill "^5.0.0"
 
-"@ui5/webcomponents-core@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-core/-/webcomponents-core-0.9.0.tgz#05b7ed388771be204f548b560722f84b69eb892f"
-  integrity sha512-i+qjcKzwmGFmr7Re6hkaItHVfrhTdfZM4Ef7GKo976jhX1TxOtFAws1xVOV9B3sJjP9fbOOIX+dE7t3p2QE3ow==
+"@ui5/webcomponents-core@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents-core/-/webcomponents-core-0.10.0.tgz#c713bcafd42f4eb32675760aae638dd0ba70be96"
+  integrity sha512-FbyVDtxzTFZ7JcwYuX8z5KjnCOMKnJJyKro4tcIOZ7PwvKwiEei9f23rE4CKBSPDVV9/gHQeF9jDBps7OYOmwA==
 
-"@ui5/webcomponents@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@ui5/webcomponents/-/webcomponents-0.9.0.tgz#e91dd2aa698bbc7780f6e4e58ba30011c823e15e"
-  integrity sha512-O0vL3gIVCIfs3X2iFmWUe21jUqaEh060vZ5g3dtcwKvC+uwZB3ucRjHSwFm3rF138io2cqL4ucGEjurOVj0gGw==
+"@ui5/webcomponents@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@ui5/webcomponents/-/webcomponents-0.10.0.tgz#101557d733bfb2ee504d3c802458647084ab3db4"
+  integrity sha512-LJA8/Na3SnkkIkyQMjj0unLrHWv1+nooooVUnHmQHdhmD5NiGh+3Q8ULxwBSml1QkgXHiUer6sgO5qgDrzfw6A==
   dependencies:
-    "@ui5/webcomponents-base" "0.9.0"
-    "@ui5/webcomponents-core" "0.9.0"
+    "@ui5/webcomponents-base" "0.10.0"
+    "@ui5/webcomponents-core" "0.10.0"
 
 "@webassemblyjs/ast@1.7.6":
   version "1.7.6"
@@ -1039,11 +1031,6 @@
     "@webassemblyjs/ast" "1.7.6"
     "@webassemblyjs/wast-parser" "1.7.6"
     "@xtuc/long" "4.2.1"
-
-"@webcomponents/shadycss@^1.5.2":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@webcomponents/shadycss/-/shadycss-1.9.0.tgz#8450465037370d4f5c32e801bb2554a7cf2f5037"
-  integrity sha512-g8Xa+6RSEME4g/wLJW4YII0eq15rvXp76RxPAuv7hx+Bdoi7GzZJ/EoZOUfyIbqAsQbII1TcWD4/+Xhs5NcM1w==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -9349,9 +9336,9 @@ url-parse@^1.4.3:
     requires-port "^1.0.0"
 
 url-search-params-polyfill@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/url-search-params-polyfill/-/url-search-params-polyfill-5.0.0.tgz#09b98337c89dcf6c6a6a0bfeb096f6ba83b7526b"
-  integrity sha512-+SCD22QJp4UnqPOI5UTTR0Ljuh8cHbjEf1lIiZrZ8nHTlTixqwVsVQTSfk5vrmDz7N09/Y+ka5jQr0ff35FnQQ==
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/url-search-params-polyfill/-/url-search-params-polyfill-5.1.0.tgz#f0405dcc2e921bf7f5fdf8c4e616f1e8088ef31b"
+  integrity sha512-yjFY7uw2xRf9e8Mg4ZVkZwtp8dMCC4cbBkEIZiTDpuSY2WJ9+Quw0wRhxncv32qaMQwmBQT+P847rO8PrFhhDA==
 
 url@^0.11.0:
   version "0.11.0"
