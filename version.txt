@@ -1,5 +1,5 @@
-commit bf685e2c707e7ce947f601e5623f9a2ece36a7e5
-Author: ilhan orhan <ilhan.myumyun@sap.com>
-Date:   Thu Mar 21 06:36:10 2019 +0200
+commit 831a2e5882ffa10cf715f68fab8f73614af5c967
+Author: Adrian Bobev <adrian.bobev@gmail.com>
+Date:   Tue Apr 23 16:38:13 2019 +0300
 
-    refactor: replace Toolbar with ShellBar (#7)
+       chore: update ui5-webcomponents version to 0.10.0 (#9)
