@@ -3,7 +3,7 @@ import logo from './logo.png';
 import './App.css';
 import TodoList from './TodoList';
 
-import "@ui5/webcomponents-base/src/sap/ui/webcomponents/base/browsersupport/Edge";
+import "@ui5/webcomponents-base/src/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/ShellBar";
 import "@ui5/webcomponents/dist/Title";
@@ -223,10 +223,10 @@ class App extends Component {
                 <ui5-datepicker format-pattern="dd/MM/yyyy" value={this.state.todoBeingEdittedDate} ref={this.dateEditInput}></ui5-datepicker>
             </div>
           </div>
-            <ui5-toolbar class="dialog-footer" data-ui5-slot="footer">
+            <div className="dialog-footer">
               <ui5-button type="Transparent" ref={this.cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
               <ui5-button type="Emphasized" ref={this.saveBtn}>Save</ui5-button>{/*save dialog info*/}
-            </ui5-toolbar>
+            </div>
         </ui5-dialog>
       </div>
     );
