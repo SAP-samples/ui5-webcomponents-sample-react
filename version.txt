@@ -1,5 +1,5 @@
-commit 0992c490e15f20759a0870898c1330f109f17d83
+commit 6770d58232bb439cc412e6b1abac2985d3cd2f9d
 Author: ilhan orhan <ilhan.myumyun@sap.com>
-Date:   Tue Apr 23 18:49:54 2019 +0300
+Date:   Wed Apr 24 15:54:16 2019 +0300
 
-    chore: remove ui5-toolbar from edit dialog footer (#12)
+    chore: adopt v0.10.1 (#13)
