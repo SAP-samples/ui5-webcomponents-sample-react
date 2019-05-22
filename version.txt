@@ -1,5 +1,5 @@
-commit 6770d58232bb439cc412e6b1abac2985d3cd2f9d
-Author: ilhan orhan <ilhan.myumyun@sap.com>
-Date:   Wed Apr 24 15:54:16 2019 +0300
+commit c7dbd23f1105f3161d22e11358cfa6cadee86a2d
+Author: Martin <martin.r.hristov@gmail.com>
+Date:   Wed May 22 18:36:22 2019 +0300
 
-    chore: adopt v0.10.1 (#13)
+    chore: adopt v0.11.0 of UI5 WebComponents (#14)
