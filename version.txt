@@ -1,5 +1,5 @@
-commit c7dbd23f1105f3161d22e11358cfa6cadee86a2d
-Author: Martin <martin.r.hristov@gmail.com>
-Date:   Wed May 22 18:36:22 2019 +0300
+commit 08dcd2a1277374254eed200532792771e53b0a12
+Author: ilhan orhan <ilhan.myumyun@sap.com>
+Date:   Thu May 23 10:57:05 2019 +0300
 
-    chore: adopt v0.11.0 of UI5 WebComponents (#14)
+    chore: update package-lock (#15)
