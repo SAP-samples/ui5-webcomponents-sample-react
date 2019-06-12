@@ -1,5 +1,5 @@
-commit 08dcd2a1277374254eed200532792771e53b0a12
-Author: ilhan orhan <ilhan.myumyun@sap.com>
-Date:   Thu May 23 10:57:05 2019 +0300
+commit 9d7308f716ee188665dc1abc443e467258d66266
+Author: Filip Siderov <filip.siderov@sap.com>
+Date:   Wed Jun 12 11:30:14 2019 +0300
 
-    chore: update package-lock (#15)
+    chore: update ui5 web components to version 0.12.0 (#16)
