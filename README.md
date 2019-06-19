@@ -79,7 +79,7 @@ import "@ui5/webcomponents/dist/Label"; // loads ui5-label
 When UI5 Web Components are used they include all of their translation files and CLDR data files in the application bundle.
 In order to decrease the bundle size of the application a custom Webpack configuration should be provided. 
 
-1. Eject the react build with ```npm run eject```
+1. Eject the react build with ```npm run build```
 2. Open ```config/webpack.config.js``` file and add the following lines before the last loader:
 ```js
 {
