@@ -1,5 +1,5 @@
-commit 9d7308f716ee188665dc1abc443e467258d66266
+commit e1070eecd5ab17d8180417d7131ffcbc44196e19
 Author: Filip Siderov <filip.siderov@sap.com>
-Date:   Wed Jun 12 11:30:14 2019 +0300
+Date:   Tue Sep 24 11:15:53 2019 +0300
 
-    chore: update ui5 web components to version 0.12.0 (#16)
+    add explanation about eject command (#18)
