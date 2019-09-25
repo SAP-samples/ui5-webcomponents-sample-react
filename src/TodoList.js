@@ -1,12 +1,15 @@
-import React, { useRef, useEffect } from "react";
-import TodoItem from "./TodoItem";
+import React, { useRef, useEffect } from 'react';
+import TodoItem from './TodoItem';
 
 function TodoList({ items, selectionChange, remove, edit }) {
   const list = useRef();
 
   useEffect(() => {
     list.current.addEventListener("selectionChange", selectionChange);
-  });
+    return () => {
+      list.current.removeEventListener("selectionChange", selectionChange);
+    }
+  }, [selectionChange]);
 
   return (
     <ui5-list id="todo-list" mode="MultiSelect" ref={list}>
@@ -18,8 +21,8 @@ function TodoList({ items, selectionChange, remove, edit }) {
             text={todo.text}
             deadline={todo.deadline}
             done={todo.done}
-            handleDelete={remove.bind(this)}
-            handleEdit={edit.bind(this)}
+            handleDelete={remove}
+            handleEdit={edit}
           ></TodoItem>
         );
       })}

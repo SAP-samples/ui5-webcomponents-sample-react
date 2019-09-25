@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import logo from './logo.png';
 import './App.css';
 import TodoList from './TodoList';
@@ -65,63 +65,47 @@ function App () {
     titleEditInput = useRef(),
     dateEditInput = useRef();
 
+  function handleCancel() {
+    editDialog.current.close();
+  }
 
-  useEffect(() => {
-    addButton.current.addEventListener('press', handleAdd);
-
-    todoInput.current.addEventListener('submit', handleAdd);
-
-    cancelBtn.current.addEventListener('press', () => {
-      editDialog.current.close();
-    });
-
-    saveBtn.current.addEventListener('press', () => {
-      saveEdits();
-      editDialog.current.close();
-    });
-  });
-
-  function saveEdits() {
+  const handleSave = useCallback(() => {
     const edittedText = titleEditInput.current.value;
     const edittedDate = dateEditInput.current.value;
 
-    const filteredTodos = todos.map((todo) => {
+    setTodos(todos => todos.map((todo) => {
       if (todo.id === todoBeingEditted.id) {
         todo.text = edittedText;
         todo.deadline = edittedDate;
       }
-
       return todo;
-    });
+    }));
 
-    setTodos(filteredTodos);
-  }
+    editDialog.current.close();
+  }, [todoBeingEditted, setTodos]);
 
-  function handleDone(event) {
-    const selectedItem = event.detail.selectedItems[0];
-    const selectedId = selectedItem.getAttribute("data-key");
+  const handleDone = useCallback(event => {
+      const selectedItem = event.detail.selectedItems[0];
+      const selectedId = selectedItem.getAttribute("data-key");
+  
+      setTodos((todos) => todos.map(todo => {
+        return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
+      }));
+  }, [setTodos]);
 
-    const updatedTodos = todos.map(todo => {
-      return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
-    });
-
-    setTodos(updatedTodos);
-  }
-
-  function handleUnDone(event) {
+  const handleUnDone = useCallback( event => {
     const selectedItems = event.detail.selectedItems;
 
-    const updatedTodos = todos.map((todo) => {
+    setTodos((todos) => todos.map((todo) => {
       const unselectedItem = selectedItems.filter(item => item.getAttribute("data-key") === todo.id.toString());
       todo.done = !!unselectedItem[0];
       return todo;
-    });
+    }));
 
-    setTodos(updatedTodos);
-  }
+  }, [setTodos]);
 
-  function handleAdd () {
-    setTodos([
+  const handleAdd = useCallback(() => {
+    setTodos(todos => [
       ...todos,
       {
         text: todoInput.current.value,
@@ -130,27 +114,53 @@ function App () {
         done: false
       }
     ]);
-  }
+  }, [setTodos]);
 
-  function handleRemove(id) {
-    const filteredTodos = todos.filter(todo => todo.id !== id);
+  const handleRemove = useCallback(id => {
+    setTodos(todos => todos.filter(todo => todo.id !== id));
+  }, [setTodos]);
 
-    setTodos(filteredTodos);
-  }
-
-  function handleEdit(id) {
+  const handleEdit = useCallback((id) => {
     const todoObj = todos.filter(todo => {
       return todo.id === id
     })[0];
 
-    setTodoBeingEditted({
+    setTodoBeingEditted(() => ({
       id: id,
       text: todoObj.text,
-      date: todoObj.deadline
-    });
+      deadline: todoObj.deadline
+    }));
 
     editDialog.current.open();
-  }
+  }, [todos, setTodoBeingEditted]);
+
+  useEffect(() => {
+    todoInput.current.addEventListener('submit', handleAdd);
+    return () => {
+      todoInput.current.removeEventListener('submit', handleAdd);
+    }
+  }, [handleAdd]);
+
+  useEffect(() => {
+    addButton.current.addEventListener("press", handleAdd);
+    return () => {
+      addButton.current.removeEventListener("press", handleAdd);
+    }
+  }, [handleAdd]);
+
+  useEffect(() => {
+    cancelBtn.current.addEventListener("press", handleCancel);
+    return () => {
+      cancelBtn.current.removeEventListener("press", handleCancel);
+    }
+  }, [handleCancel]);
+
+  useEffect(() => {
+    saveBtn.current.addEventListener("press", handleSave);
+    return () => {
+      saveBtn.current.removeEventListener("press", handleSave);
+    }
+  }, [handleSave]);
 
   return (
       <div className="app">
@@ -194,7 +204,7 @@ function App () {
 
             <div className="edit-wrapper date-edit-fields">
                 <ui5-label>Date:</ui5-label>
-                <ui5-datepicker format-pattern="dd/MM/yyyy" value={todoBeingEditted.date} ref={dateEditInput}></ui5-datepicker>
+                <ui5-datepicker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-datepicker>
             </div>
           </div>
             <div className="dialog-footer" >
