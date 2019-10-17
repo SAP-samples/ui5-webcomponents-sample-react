@@ -1,5 +1,5 @@
-commit e1070eecd5ab17d8180417d7131ffcbc44196e19
-Author: Filip Siderov <filip.siderov@sap.com>
-Date:   Tue Sep 24 11:15:53 2019 +0300
+commit 4e1002f05d737a85b1d68b318f25159bc08dfde0
+Author: Merbin J Anselm <merbinjanselm@gmail.com>
+Date:   Thu Oct 17 13:33:46 2019 +0000
 
-    add explanation about eject command (#18)
+    Migrated to new React 16.8 Hooks & update React version (#20)
