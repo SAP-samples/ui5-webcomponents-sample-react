@@ -3,7 +3,7 @@ import logo from './logo.png';
 import './App.css';
 import TodoList from './TodoList';
 
-import "@ui5/webcomponents-base/src/browsersupport/Edge";
+import "@ui5/webcomponents-base/dist/features/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/ShellBar";
 import "@ui5/webcomponents/dist/Title";
@@ -172,7 +172,7 @@ function App () {
           <div className="create-todo-wrapper">
             <ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
             <ui5-datepicker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-datepicker>
-            <ui5-button class="add-todo-element-width" ref={addButton} type="Emphasized">Add Todo</ui5-button>
+            <ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
           </div>
 
           <div className="list-todos-wrapper">
@@ -208,8 +208,8 @@ function App () {
             </div>
           </div>
             <div className="dialog-footer" >
-              <ui5-button type="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
-              <ui5-button type="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
+              <ui5-button design="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
+              <ui5-button design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
             </div>
         </ui5-dialog>
       </div>
