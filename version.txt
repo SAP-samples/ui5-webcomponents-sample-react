@@ -1,5 +1,5 @@
-commit 4e1002f05d737a85b1d68b318f25159bc08dfde0
-Author: Merbin J Anselm <merbinjanselm@gmail.com>
-Date:   Thu Oct 17 13:33:46 2019 +0000
+commit cf53b569f60606fbcdf98a687781ae84445bcb61
+Author: Filip Siderov <filip.siderov@sap.com>
+Date:   Fri Oct 18 10:20:38 2019 +0300
 
-    Migrated to new React 16.8 Hooks & update React version (#20)
+    update ui5-webcomponents version to 1.0.0-rc4 (#22)
