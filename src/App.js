@@ -156,7 +156,7 @@ function App () {
   }, [handleCancel]);
 
   useEffect(() => {
-    // saveBtn.current.addEventListener("press", handleSave);
+    saveBtn.current.addEventListener("press", handleSave);
     return () => {
       saveBtn.current.removeEventListener("press", handleSave);
     }
@@ -209,7 +209,7 @@ function App () {
           </div>
             <div className="dialog-footer" >
               <ui5-button design="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
-              <ui5-button design="Emphasized" onclick={handleSave} ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
+              <ui5-button design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
             </div>
         </ui5-dialog>
       </div>
