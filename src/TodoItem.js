@@ -6,22 +6,22 @@ function TodoItem ({id, done, hidden, text, deadline, handleDelete, handleEdit})
     deleteButton = useRef();
 
   useEffect(() => {
-    editButton.current.addEventListener("press", () => {
+    editButton.current.addEventListener("click", () => {
       handleEdit(id);
     });
     return () => {
-      editButton.current.removeEventListener("press", () => {
+      editButton.current.removeEventListener("click", () => {
         handleEdit(id);
       });
     }
   }, [handleEdit]);
 
   useEffect(() => {
-    deleteButton.current.addEventListener("press", () => {
+    deleteButton.current.addEventListener("click", () => {
       handleDelete(id);
     });
     return () => {
-      deleteButton.current.removeEventListener("press", () => {
+      deleteButton.current.removeEventListener("click", () => {
         handleDelete(id);
       });
     }

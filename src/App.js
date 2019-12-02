@@ -5,7 +5,6 @@ import TodoList from './TodoList';
 
 import "@ui5/webcomponents-base/dist/features/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
-import "@ui5/webcomponents/dist/ShellBar";
 import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
@@ -15,6 +14,7 @@ import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Dialog";
 import "@ui5/webcomponents/dist/Label";
 import "@ui5/webcomponents/dist/TextArea";
+import "@ui5/webcomponents-fiori/dist/ShellBar";
 
 function App () {
 
@@ -142,23 +142,23 @@ function App () {
   }, [handleAdd]);
 
   useEffect(() => {
-    addButton.current.addEventListener("press", handleAdd);
+    addButton.current.addEventListener("click", handleAdd);
     return () => {
-      addButton.current.removeEventListener("press", handleAdd);
+      addButton.current.removeEventListener("click", handleAdd);
     }
   }, [handleAdd]);
 
   useEffect(() => {
-    cancelBtn.current.addEventListener("press", handleCancel);
+    cancelBtn.current.addEventListener("click", handleCancel);
     return () => {
-      cancelBtn.current.removeEventListener("press", handleCancel);
+      cancelBtn.current.removeEventListener("click", handleCancel);
     }
   }, [handleCancel]);
 
   useEffect(() => {
-    saveBtn.current.addEventListener("press", handleSave);
+    saveBtn.current.addEventListener("click", handleSave);
     return () => {
-      saveBtn.current.removeEventListener("press", handleSave);
+      saveBtn.current.removeEventListener("click", handleSave);
     }
   }, [handleSave]);
 
