@@ -142,23 +142,23 @@ function App () {
   }, [handleAdd]);
 
   useEffect(() => {
-    addButton.current.addEventListener("press", handleAdd);
+    addButton.current.addEventListener("click", handleAdd);
     return () => {
-      addButton.current.removeEventListener("press", handleAdd);
+      addButton.current.removeEventListener("click", handleAdd);
     }
   }, [handleAdd]);
 
   useEffect(() => {
-    cancelBtn.current.addEventListener("press", handleCancel);
+    cancelBtn.current.addEventListener("click", handleCancel);
     return () => {
-      cancelBtn.current.removeEventListener("press", handleCancel);
+      cancelBtn.current.removeEventListener("click", handleCancel);
     }
   }, [handleCancel]);
 
   useEffect(() => {
-    saveBtn.current.addEventListener("press", handleSave);
+    saveBtn.current.addEventListener("click", handleSave);
     return () => {
-      saveBtn.current.removeEventListener("press", handleSave);
+      saveBtn.current.removeEventListener("click", handleSave);
     }
   }, [handleSave]);
 
