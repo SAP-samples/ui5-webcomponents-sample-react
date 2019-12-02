@@ -1,5 +1,5 @@
-commit cf53b569f60606fbcdf98a687781ae84445bcb61
-Author: Filip Siderov <filip.siderov@sap.com>
-Date:   Fri Oct 18 10:20:38 2019 +0300
+commit 42bfca543b58e3947491b25a49d21fb3a20f9391
+Author: ilhan orhan <ilhan.myumyun@sap.com>
+Date:   Mon Dec 2 16:13:19 2019 +0200
 
-    update ui5-webcomponents version to 1.0.0-rc4 (#22)
+    chore: migrate to RC 5 (#23)
