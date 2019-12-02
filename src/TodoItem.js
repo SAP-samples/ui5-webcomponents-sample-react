@@ -10,11 +10,11 @@ class TodoItem extends Component {
   componentDidMount() {
     const that = this;
 
-    this.delete.current.addEventListener('press', event => {
+    this.delete.current.addEventListener('click', event => {
       that.props.handleDelete(that.props.id);
     });
 
-    this.edit.current.addEventListener('press', event => {
+    this.edit.current.addEventListener('click', event => {
       that.props.handleEdit(parseInt(that.props.id));
     });
   }
@@ -26,7 +26,7 @@ class TodoItem extends Component {
           <span className="li-content-text">{this.props.text} - finish before: {this.props.deadline}</span>
           <div className="li-content-actions">
             <ui5-button class="edit-btn" ref={this.edit}>Edit</ui5-button>
-            <ui5-button type="Negative" ref={this.delete}>Delete</ui5-button>
+            <ui5-button design="Negative" ref={this.delete}>Delete</ui5-button>
           </div>
         </div>
       </ui5-li-custom>

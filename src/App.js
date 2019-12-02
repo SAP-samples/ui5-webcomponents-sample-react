@@ -5,7 +5,6 @@ import TodoList from './TodoList';
 
 import "@ui5/webcomponents-base/src/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
-import "@ui5/webcomponents/dist/ShellBar";
 import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
@@ -15,6 +14,7 @@ import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Dialog";
 import "@ui5/webcomponents/dist/Label";
 import "@ui5/webcomponents/dist/TextArea";
+import "@ui5/webcomponents-fiori/dist/ShellBar";
 
 class App extends Component {
 
@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.addButton.current.addEventListener('press', event => {
+    this.addButton.current.addEventListener('click', event => {
       this.handleAdd();
     });
 
@@ -78,11 +78,11 @@ class App extends Component {
       this.handleAdd();
     });
 
-    this.cancelBtn.current.addEventListener('press', event => {
+    this.cancelBtn.current.addEventListener('click', event => {
       this.editDialog.current.close();
     });
 
-    this.saveBtn.current.addEventListener('press', event => {
+    this.saveBtn.current.addEventListener('click', event => {
       this.saveEdits();
       this.editDialog.current.close();
     });
@@ -188,7 +188,7 @@ class App extends Component {
           <div className="create-todo-wrapper">
             <ui5-input placeholder="My Todo ..." ref={this.todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
             <ui5-datepicker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={this.todoDeadline} id="date-picker"></ui5-datepicker>
-            <ui5-button class="add-todo-element-width" ref={this.addButton} type="Emphasized">Add Todo</ui5-button>
+            <ui5-button class="add-todo-element-width" ref={this.addButton} design="Emphasized">Add Todo</ui5-button>
           </div>
 
           <div className="list-todos-wrapper">
@@ -224,8 +224,8 @@ class App extends Component {
             </div>
           </div>
             <div className="dialog-footer" >
-              <ui5-button type="Transparent" ref={this.cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
-              <ui5-button type="Emphasized" ref={this.saveBtn}>Save</ui5-button>{/*save dialog info*/}
+              <ui5-button design="Transparent" ref={this.cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
+              <ui5-button design="Emphasized" ref={this.saveBtn}>Save</ui5-button>{/*save dialog info*/}
             </div>
         </ui5-dialog>
       </div>
