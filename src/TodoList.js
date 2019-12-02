@@ -1,40 +1,33 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import TodoItem from './TodoItem';
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.list = React.createRef();
-    this.deleteBtn = React.createRef();
-  }
+function TodoList({ items, selectionChange, remove, edit }) {
+  const list = useRef();
 
-  componentDidMount() {
-    this.list.current.addEventListener("selectionChange", event => {
-      this.props.selectionChange(event);
-    });
-  }
-  
-  render() {
-    return (
-      <ui5-list id="todo-list" mode="MultiSelect" ref={this.list}>
-        {
-          this.props.items.map((todo) => {
-            return (
-              <TodoItem
-                key={todo.id}
-                id={todo.id}
-                text={todo.text}
-                deadline={todo.deadline}
-                done={todo.done}
-                handleDelete={this.props.remove.bind(this)}
-                handleEdit={this.props.edit.bind(this)}>
-              </TodoItem>
-            )
-          })
-        }
-      </ui5-list>
-    );
-  }
+  useEffect(() => {
+    list.current.addEventListener("selectionChange", selectionChange);
+    return () => {
+      list.current.removeEventListener("selectionChange", selectionChange);
+    }
+  }, [selectionChange]);
+
+  return (
+    <ui5-list id="todo-list" mode="MultiSelect" ref={list}>
+      {items.map(todo => {
+        return (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            text={todo.text}
+            deadline={todo.deadline}
+            done={todo.done}
+            handleDelete={remove}
+            handleEdit={edit}
+          ></TodoItem>
+        );
+      })}
+    </ui5-list>
+  );
 }
 
 export default TodoList;
