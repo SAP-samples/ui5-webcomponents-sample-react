@@ -81,7 +81,7 @@ In order to decrease the bundle size of the application a custom Webpack configu
 (This configuration is already done for this project, so you will NOT be able to run ``` npm run eject```, because it is
 one time operation, which can NOT be reverted.)
 
-1. Eject the react build with ```npm run build```
+1. Eject the react build with ```npm run eject```
 2. Open ```config/webpack.config.js``` file and add the following lines before the last loader:
 ```js
 {
