@@ -1,0 +1,14 @@
+{
+  "name": "approuter",
+  "version": "0.0.1",
+  "engines": {
+    "node": "12.x.x"
+  },
+  "scripts": {
+    "start": "node  -r dotenv/config node_modules/@sap/approuter/approuter.js"
+  },
+  "dependencies": {
+    "@sap/approuter": "^6.7.1",
+    "dotenv": "^8.2.0"
+  }
+}

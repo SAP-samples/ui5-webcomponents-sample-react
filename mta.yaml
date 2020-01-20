@@ -1,0 +1,40 @@
+ID: reacttodoapp
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: approuter
+    type: approuter.nodejs
+    path: appRouter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: html5_repo_runtime
+        # group: HTTPHEADERS
+        # properties: 
+        #   httpHeaders: '[{ "X-Frame-Options": "ALLOW-FROM http://localhost" }]"'
+        #   X-Frame-Options: "ALLOW-FROM https://d056949trial-cftrialjan20-dev-approuter.cfapps.eu10.hana.ondemand.com/todoapp/index.html"
+  - name: ui_deployer
+    type: com.sap.html5.application-content
+    path: deployer
+    requires:
+      - name: html5_repo_host
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build --prefix ..
+resources:
+  - name: html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+      config:
+        sizeLimit: 5
+    type: org.cloudfoundry.managed-service
