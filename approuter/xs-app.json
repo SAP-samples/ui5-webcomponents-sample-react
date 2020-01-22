@@ -1,12 +1,4 @@
 {
   "welcomeFile": "todoapp/",
-  "authenticationMethod": "none",
-  "routes": [
-    {
-      "source": "^/(.*)$",
-      "target": "$1",
-      "authenticationType": "none",
-      "service": "html5-apps-repo-rt"
-    }
-  ]
+  "routes": []
 }
