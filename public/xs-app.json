@@ -1,11 +1,11 @@
 {
     "welcomeFile": "index.html",
-    "authenticationMethod": "none",
+    "authenticationMethod": "route",
     "routes": [
         {
             "source": "^(.*)",
             "target": "$1",
-            "authenticationType": "none",
+            "authenticationType": "xsuaa",
             "service": "html5-apps-repo-rt"
         }
     ]
