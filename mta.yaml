@@ -1,8 +1,11 @@
+
+_schema-version: 3.3.0
 ID: reacttodoapp
-_schema-version: '2.1'
+version: 0.7.0
 parameters:
   deploy_mode: html5-repo
-version: 0.0.1
+  enable-parallel-deployments: true
+  
 modules:
   - name: approuter
     type: approuter.nodejs
@@ -10,6 +13,9 @@ modules:
     parameters:
       disk-quota: 256M
       memory: 256M
+    properties:
+      httpHeaders:
+      - X-Frame-Options: "ALLOW-FROM hana.ondemand.com"
     requires:
       - name: html5_repo_runtime
       - name: uaa
@@ -22,6 +28,7 @@ modules:
       builder: custom
       commands:
         - npm run build --prefix ..
+
 resources:
   - name: html5_repo_runtime
     parameters:
