@@ -1,7 +1,7 @@
 {
   "name": "ui5-webcomponents-sample-react",
   "version": "0.7.0",
-  "homepage": "./",
+  "homepage": "/todoapp",
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.6",
@@ -58,7 +58,8 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "GENERATE_SOURCEMAP=false node scripts/build.js && rm -rf deployer/resources/* && mv build deployer/resources/",
+    "build:mta": "mbt build",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -115,5 +116,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "mbt": "^1.0.8"
   }
 }

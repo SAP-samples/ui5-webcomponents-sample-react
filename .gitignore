@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules
+package-lock.json
 /.pnp
 .pnp.js
 
@@ -9,7 +10,8 @@
 /coverage
 
 # production
-/build
+/deployer/resources/
+/mta_archives/
 
 # misc
 .DS_Store
