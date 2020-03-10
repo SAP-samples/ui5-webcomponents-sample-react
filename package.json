@@ -58,7 +58,10 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "GENERATE_SOURCEMAP=false node scripts/build.js && rm -rf deployer/resources/* && mv build deployer/resources/",
+    "build": "run-s build:react build:removeExistingResources build:moveNewResources",
+    "build:react": "GENERATE_SOURCEMAP=false node scripts/build.js",
+    "build:removeExistingResources": "rimraf deployer/resources/*",
+    "build:moveNewResources": "mv build/ deployer/resources/",
     "build:mta": "mbt build",
     "test": "node scripts/test.js"
   },
@@ -118,6 +121,8 @@
     ]
   },
   "devDependencies": {
-    "mbt": "^1.0.8"
+    "mbt": "^1.0.8",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   }
 }
