@@ -199,7 +199,7 @@ function App () {
           <div className="dialog-content">
             <div className="edit-wrapper">
                 <ui5-label>Title:</ui5-label>
-                <ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
+                <ui5-textarea class="title-textarea" maxlength="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
             </div>
 
             <div className="edit-wrapper date-edit-fields">
