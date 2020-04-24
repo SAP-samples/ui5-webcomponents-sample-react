@@ -1,5 +1,5 @@
-commit 42bfca543b58e3947491b25a49d21fb3a20f9391
+commit c7d0c4f6d81b9dd1aace07fff42264c9bc2fd22b
 Author: ilhan orhan <ilhan.myumyun@sap.com>
-Date:   Mon Dec 2 16:13:19 2019 +0200
+Date:   Fri Apr 24 11:49:49 2020 +0300
 
-    chore: migrate to RC 5 (#23)
+    use "next" version (#30)
