@@ -18,6 +18,8 @@ import "@ui5/webcomponents-fiori/dist/ShellBar";
 
 function App () {
 
+  let counter = 10;
+
   const [todos, setTodos] = useState([
     {
       text: "Get some carrots",
@@ -87,7 +89,7 @@ function App () {
   const handleDone = useCallback(event => {
       const selectedItem = event.detail.selectedItems[0];
       const selectedId = selectedItem.getAttribute("data-key");
-  
+
       setTodos((todos) => todos.map(todo => {
         return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
       }));
@@ -109,7 +111,7 @@ function App () {
       ...todos,
       {
         text: todoInput.current.value,
-        id: todos.length + 1,
+        id: ++counter,
         deadline: todoDeadline.current.value,
         done: false
       }
