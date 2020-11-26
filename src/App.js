@@ -166,7 +166,7 @@ function App () {
       <div className="app">
         <ui5-shellbar
           primary-title="UI5 Web Components React Sample Application">
-            <img slot='logo' height='30px' src={logo} />
+            <img alt="logo" slot="logo" height="30px" src={logo} />
         </ui5-shellbar>
         <section className="app-content">
           <div className="create-todo-wrapper">
