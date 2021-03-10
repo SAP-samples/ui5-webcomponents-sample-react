@@ -8,6 +8,7 @@
     "@svgr/webpack": "2.4.1",
     "@ui5/webcomponents": "next",
     "@ui5/webcomponents-fiori": "next",
+    "@ui5/webcomponents-ie11": "next",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",

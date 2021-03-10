@@ -3,7 +3,7 @@ import logo from './logo.png';
 import './App.css';
 import TodoList from './TodoList';
 
-import "@ui5/webcomponents-base/dist/features/browsersupport/Edge";
+import "@ui5/webcomponents-ie11/dist/features/IE11.js";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
@@ -55,6 +55,8 @@ function App () {
     text: "",
     date: ""
   });
+
+  const [steps, setSteps] = useState(6);
 
   const addButton = useRef(),
     todoInput = useRef(),
@@ -109,12 +111,14 @@ function App () {
       ...todos,
       {
         text: todoInput.current.value,
-        id: todos.length + 1,
+        id: steps,
         deadline: todoDeadline.current.value,
         done: false
       }
     ]);
-  }, [setTodos]);
+
+    setSteps(prevState => prevState + 1);
+  }, [setTodos, steps]);
 
   const handleRemove = useCallback(id => {
     setTodos(todos => todos.filter(todo => todo.id !== id));
