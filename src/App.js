@@ -16,7 +16,7 @@ import "@ui5/webcomponents/dist/Label";
 import "@ui5/webcomponents/dist/TextArea";
 import "@ui5/webcomponents-fiori/dist/ShellBar";
 
-function App () {
+function App() {
 
   const [todos, setTodos] = useState([
     {
@@ -85,15 +85,15 @@ function App () {
   }, [todoBeingEditted, setTodos]);
 
   const handleDone = useCallback(event => {
-      const selectedItem = event.detail.selectedItems[0];
-      const selectedId = selectedItem.getAttribute("data-key");
-  
-      setTodos((todos) => todos.map(todo => {
-        return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
-      }));
+    const selectedItem = event.detail.selectedItems[0];
+    const selectedId = selectedItem.getAttribute("data-key");
+
+    setTodos((todos) => todos.map(todo => {
+      return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
+    }));
   }, [setTodos]);
 
-  const handleUnDone = useCallback( event => {
+  const handleUnDone = useCallback(event => {
     const selectedItems = event.detail.selectedItems;
 
     setTodos((todos) => todos.map((todo) => {
@@ -163,56 +163,56 @@ function App () {
   }, [handleSave]);
 
   return (
-      <div className="app">
-        <ui5-shellbar
-          primary-title="UI5 Web Components React Sample Application"
-          logo={logo}>
-        </ui5-shellbar>
-        <section className="app-content">
-          <div className="create-todo-wrapper">
-            <ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
-            <ui5-datepicker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-datepicker>
-            <ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
-          </div>
+    <div className="app">
+      <ui5-shellbar
+        primary-title="UI5 Web Components React Sample Application">
+        <img alt="logo" slot="logo" height="30px" src={logo} />
+      </ui5-shellbar>
+      <section className="app-content">
+        <div className="create-todo-wrapper">
+          <ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
+          <ui5-datepicker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-datepicker>
+          <ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
+        </div>
 
-          <div className="list-todos-wrapper">
+        <div className="list-todos-wrapper">
+          <TodoList
+            items={todos.filter(todo => !todo.done)}
+            selectionChange={handleDone}
+            remove={handleRemove}
+            edit={handleEdit}
+          >
+          </TodoList>
+
+          <ui5-panel header-text="Completed tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
             <TodoList
-              items={todos.filter(todo => !todo.done)}
-              selectionChange={handleDone}
+              items={todos.filter(todo => todo.done)}
+              selectionChange={handleUnDone}
               remove={handleRemove}
               edit={handleEdit}
             >
             </TodoList>
-
-            <ui5-panel header-text="Completed tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
-              <TodoList
-                items={todos.filter(todo => todo.done)}
-                selectionChange={handleUnDone}
-                remove={handleRemove}
-                edit={handleEdit}
-              >
-              </TodoList>
-            </ui5-panel>
+          </ui5-panel>
+        </div>
+      </section>
+      <ui5-dialog header-text="Edit Todo item" ref={editDialog}>
+        <div className="dialog-content">
+          <div className="edit-wrapper">
+            <ui5-label>Title:</ui5-label>
+            <ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
           </div>
-        </section>
-        <ui5-dialog header-text="Edit Todo item" ref={editDialog}>
-          <div className="dialog-content">
-            <div className="edit-wrapper">
-                <ui5-label>Title:</ui5-label>
-                <ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
-            </div>
 
-            <div className="edit-wrapper date-edit-fields">
-                <ui5-label>Date:</ui5-label>
-                <ui5-datepicker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-datepicker>
-            </div>
+          <div className="edit-wrapper date-edit-fields">
+            <ui5-label>Date:</ui5-label>
+            <ui5-datepicker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-datepicker>
           </div>
-            <div className="dialog-footer" >
-              <ui5-button design="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
-              <ui5-button design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
-            </div>
-        </ui5-dialog>
-      </div>
+        </div>
+        <div className="dialog-footer" >
+          <ui5-button design="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
+          <ui5-button design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
+        </div>
+      </ui5-dialog>
+    </div>
   );
 }
 
