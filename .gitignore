@@ -27,3 +27,4 @@ yarn-error.log*
 
 # Don't include private SSH key for deployment via Travis CI
 deploy_key
+build/
