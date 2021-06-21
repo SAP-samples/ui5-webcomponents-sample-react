@@ -9,7 +9,7 @@ parameters:
 modules:
   - name: approuter
     type: approuter.nodejs
-    path: appRouter
+    path: approuter
     parameters:
       disk-quota: 256M
       memory: 256M
