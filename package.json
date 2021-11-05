@@ -6,13 +6,13 @@
   "dependencies": {
     "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
-    "@ui5/webcomponents": "next",
-    "@ui5/webcomponents-fiori": "next",
+    "@ui5/webcomponents": "0.0.0-dc3ccac50",
+    "@ui5/webcomponents-fiori": "0.0.0-dc3ccac50",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
-    "babel-plugin-named-asset-import": "^0.3.0",
+    "babel-plugin-named-asset-import": "^0.3.7",
     "babel-preset-react-app": "^7.0.0",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
@@ -42,10 +42,10 @@
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.3.1",
     "postcss-safe-parser": "4.0.1",
-    "react": "^16.8.0",
+    "react": "^16.14.0",
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.1",
-    "react-dom": "^16.8.0",
+    "react-dom": "^16.14.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
@@ -115,5 +115,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7"
   }
 }
