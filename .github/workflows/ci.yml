@@ -1,13 +1,13 @@
 name: CI
-  on:
-    push:
-      branches:
-        - main
-    pull_request:
-      branches:
-        - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
-  test-and-build:
+  Test-and-Build:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
