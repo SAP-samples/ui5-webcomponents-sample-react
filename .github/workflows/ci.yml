@@ -20,4 +20,3 @@ jobs:
           npm install
       - name: build project
         run: npm run build
-      - run: echo "🍏 This job's status is ${{ job.status }}."
