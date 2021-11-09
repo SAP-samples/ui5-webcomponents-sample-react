@@ -3,7 +3,6 @@ import logo from './logo.png';
 import './App.css';
 import TodoList from './TodoList';
 
-import "@ui5/webcomponents-base/dist/features/browsersupport/Edge";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
@@ -131,7 +130,7 @@ function App () {
       deadline: todoObj.deadline
     }));
 
-    editDialog.current.open();
+    editDialog.current.show();
   }, [todos, setTodoBeingEditted]);
 
   useEffect(() => {
