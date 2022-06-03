@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Getting started
 1. [Clone this repository](https://help.github.com/articles/cloning-a-repository/) using the [GitHub Command line tool](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and navigate into the downloaded directory.
     ```sh
-    git clone https://github.com/SAP/ui5-webcomponents-sample-react.git
+    git clone https://github.com/SAP-samples/ui5-webcomponents-sample-react.git
     cd ui5-webcomponents-sample-react
     ```
 1. Install all dependencies
