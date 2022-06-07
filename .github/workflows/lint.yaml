@@ -1,4 +1,4 @@
-name: CI
+name: Lint
 on:
   push:
     branches:
@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v2.4.1
         with:
           node-version: 16.x
-      - name: Install and Build
+      - name: Install and Lint
         run: |
           npm install
-          npm run build
+          npm run lint

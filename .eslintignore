@@ -1,0 +1,13 @@
+# Ignore files by extension
+/**/*.svg
+/**/*.png
+/**/*.md
+
+# Additionally ignore files for linting
+/**/*.html
+/**/*.css
+/**/*.json
+/**/*.xml
+/**/*.properties
+/**/*.yaml
+/**/*.yml
