@@ -170,7 +170,7 @@ function App () {
         <section className="app-content">
           <div className="create-todo-wrapper">
             <ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
-            <ui5-datepicker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-datepicker>
+            <ui5-date-picker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
             <ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
           </div>
 
@@ -203,7 +203,7 @@ function App () {
 
             <div className="edit-wrapper date-edit-fields">
                 <ui5-label>Date:</ui5-label>
-                <ui5-datepicker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-datepicker>
+                <ui5-date-picker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-date-picker>
             </div>
           </div>
             <div className="dialog-footer" >
