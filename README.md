@@ -8,8 +8,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
  
 ## Prerequisites
-- [Node.js](https://nodejs.org/) (**version 8.5 or higher** ⚠️)
-- [Yarn](https://yarnpkg.com/en/) (Optional usage of yarn)
+- [Node.js](https://nodejs.org/) (**version 14 or higher** ⚠️)
 
 ## Getting started
 1. [Clone this repository](https://help.github.com/articles/cloning-a-repository/) using the [GitHub Command line tool](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and navigate into the downloaded directory.
