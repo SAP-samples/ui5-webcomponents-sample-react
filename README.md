@@ -17,16 +17,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     git clone https://github.com/SAP-samples/ui5-webcomponents-sample-react.git
     cd ui5-webcomponents-sample-react
     ```
-1. Install all dependencies
-    ```sh
-    yarn
-    ```
-    or
+2. Install all dependencies
     ```sh
     npm install
     ```
 
-1.  Start a local server and run the application. (The running application can be found here: http://localhost:3000)
+3.  Start a local server and run the application. (The running application can be found here: http://localhost:3000)
     ```sh
     npm start
     ```

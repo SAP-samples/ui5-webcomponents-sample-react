@@ -1,0 +1,7 @@
+# Ignore files
+package-lock.json
+
+# Ignore files by extension
+/**/*.svg
+/**/*.png
+/**/*.md
