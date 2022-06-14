@@ -1,4 +1,5 @@
 ![UI5 logo](/docs/images/UI5_logo_wide.png)
+[![CI](https://github.com/SAP-samples/ui5-webcomponents-sample-react/actions/workflows/ci.yml/badge.svg)](https://github.com/SAP-samples/ui5-webcomponents-sample-react/actions/workflows/ci.yml)
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/ui5-webcomponents-sample-react)](https://api.reuse.software/info/github.com/SAP-samples/ui5-webcomponents-sample-react)
 
 # UI5 Web Components React Sample Application
