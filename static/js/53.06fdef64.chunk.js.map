@@ -1,0 +1,1 @@
+{"version":3,"sources":["../node_modules/@ui5/webcomponents-localization/dist/generated/assets/cldr/nb.json"],"names":["module","exports","__webpack_require__","p"],"mappings":"8EAAAA,EAAAC,QAAiBC,EAAAC,EAAuB","file":"static/js/53.06fdef64.chunk.js","sourcesContent":["module.exports = __webpack_public_path__ + \"static/media/nb.4ba7fb68.json\";"],"sourceRoot":""}

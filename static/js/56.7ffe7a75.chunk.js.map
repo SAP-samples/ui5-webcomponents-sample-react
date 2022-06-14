@@ -1,0 +1,1 @@
+{"version":3,"sources":["../node_modules/@ui5/webcomponents-localization/dist/generated/assets/cldr/pl.json"],"names":["module","exports","__webpack_require__","p"],"mappings":"8EAAAA,EAAAC,QAAiBC,EAAAC,EAAuB","file":"static/js/56.7ffe7a75.chunk.js","sourcesContent":["module.exports = __webpack_public_path__ + \"static/media/pl.2f64eacc.json\";"],"sourceRoot":""}
