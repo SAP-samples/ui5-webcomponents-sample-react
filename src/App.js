@@ -21,202 +21,201 @@ import "@ui5/webcomponents-fiori/dist/Assets";
 setTheme("sap_horizon");
 function App () {
 
-  const [todos, setTodos] = useState([
-    {
-      text: "Get some carrots",
-      id: 1,
-      deadline: "27/7/2018",
-      done: false
-    },
-    {
-      text: "Do some magic",
-      id: 2,
-      deadline: "22/7/2018",
-      done: false
-    },
-    {
-      text: "Go to the gym",
-      id: 3,
-      deadline: "24/7/2018",
-      done: true
-    },
-    {
-      text: "Buy milk",
-      id: 4,
-      deadline: "30/7/2018",
-      done: false
-    },
-    {
-      text: "Eat some fruits",
-      id: 5,
-      deadline: "29/7/2018",
-      done: false
-    }
-  ]);
-  const [todoBeingEditted, setTodoBeingEditted] = useState({
-    id: "",
-    text: "",
-    date: ""
-  });
+	const [todos, setTodos] = useState([
+		{
+			text: "Get some carrots",
+			id: 1,
+			deadline: "27/7/2018",
+			done: false
+		},
+		{
+			text: "Do some magic",
+			id: 2,
+			deadline: "22/7/2018",
+			done: false
+		},
+		{
+			text: "Go to the gym",
+			id: 3,
+			deadline: "24/7/2018",
+			done: true
+		},
+		{
+			text: "Buy milk",
+			id: 4,
+			deadline: "30/7/2018",
+			done: false
+		},
+		{
+			text: "Eat some fruits",
+			id: 5,
+			deadline: "29/7/2018",
+			done: false
+		}
+	]);
+	const [todoBeingEditted, setTodoBeingEditted] = useState({
+		id: "",
+		text: "",
+		date: ""
+	});
 
-  const addButton = useRef(),
-    todoInput = useRef(),
-    todoDeadline = useRef(),
-    editDialog = useRef(),
-    cancelBtn = useRef(),
-    saveBtn = useRef(),
-    titleEditInput = useRef(),
-    dateEditInput = useRef();
+	const addButton = useRef(),
+		todoInput = useRef(),
+		todoDeadline = useRef(),
+		editDialog = useRef(),
+		cancelBtn = useRef(),
+		saveBtn = useRef(),
+		titleEditInput = useRef(),
+		dateEditInput = useRef();
 
-  function handleCancel() {
-    editDialog.current.close();
-  }
+	function handleCancel() {
+		editDialog.current.close();
+	}
 
-  const handleSave = useCallback(() => {
-    const edittedText = titleEditInput.current.value;
-    const edittedDate = dateEditInput.current.value;
+	const handleSave = useCallback(() => {
+		const edittedText = titleEditInput.current.value;
+		const edittedDate = dateEditInput.current.value;
 
-    setTodos(todos => todos.map((todo) => {
-      if (todo.id === todoBeingEditted.id) {
-        todo.text = edittedText;
-        todo.deadline = edittedDate;
-      }
-      return todo;
-    }));
+		setTodos(todos => todos.map((todo) => {
+			if (todo.id === todoBeingEditted.id) {
+			todo.text = edittedText;
+			todo.deadline = edittedDate;
+			}
+			return todo;
+		}));
 
-    editDialog.current.close();
-  }, [todoBeingEditted, setTodos]);
+		editDialog.current.close();
+	}, [todoBeingEditted, setTodos]);
 
-  const handleDone = useCallback(event => {
-      const selectedItem = event.detail.selectedItems[0];
-      const selectedId = selectedItem.getAttribute("data-key");
-  
-      setTodos((todos) => todos.map(todo => {
-        return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
-      }));
-  }, [setTodos]);
+	const handleDone = useCallback(event => {
+		const selectedItem = event.detail.selectedItems[0];
+		const selectedId = selectedItem.getAttribute("data-key");
 
-  const handleUnDone = useCallback( event => {
-    const selectedItems = event.detail.selectedItems;
+		setTodos((todos) => todos.map(todo => {
+		return { ...todo, done: (todo.done || (selectedId === todo.id.toString())) };
+		}));
+	}, [setTodos]);
 
-    setTodos((todos) => todos.map((todo) => {
-      const unselectedItem = selectedItems.filter(item => item.getAttribute("data-key") === todo.id.toString());
-      todo.done = !!unselectedItem[0];
-      return todo;
-    }));
+	const handleUnDone = useCallback( event => {
+		const selectedItems = event.detail.selectedItems;
 
-  }, [setTodos]);
+		setTodos((todos) => todos.map((todo) => {
+			const unselectedItem = selectedItems.filter(item => item.getAttribute("data-key") === todo.id.toString());
+			todo.done = !!unselectedItem[0];
+			return todo;
+		}));
 
-  const handleAdd = useCallback(() => {
-    setTodos(todos => [
-      ...todos,
-      {
-        text: todoInput.current.value,
-        id: todos.length + 1,
-        deadline: todoDeadline.current.value,
-        done: false
-      }
-    ]);
-  }, [setTodos]);
+	}, [setTodos]);
 
-  const handleRemove = useCallback(id => {
-    setTodos(todos => todos.filter(todo => todo.id !== id));
-  }, [setTodos]);
+	const handleAdd = useCallback(() => {
+		setTodos(todos => [
+			...todos,
+			{
+			text: todoInput.current.value,
+			id: todos.length + 1,
+			deadline: todoDeadline.current.value,
+			done: false
+			}
+		]);
+	}, [setTodos]);
 
-  const handleEdit = useCallback((id) => {
-    const todoObj = todos.filter(todo => {
-      return todo.id === id
-    })[0];
+	const handleRemove = useCallback(id => {
+		setTodos(todos => todos.filter(todo => todo.id !== id));
+	}, [setTodos]);
 
-    setTodoBeingEditted(() => ({
-      id: id,
-      text: todoObj.text,
-      deadline: todoObj.deadline
-    }));
+	const handleEdit = useCallback((id) => {
+		const todoObj = todos.filter(todo => {
+			return todo.id === id
+		})[0];
 
-    editDialog.current.show();
-  }, [todos, setTodoBeingEditted]);
+		setTodoBeingEditted(() => ({
+			id: id,
+			text: todoObj.text,
+			deadline: todoObj.deadline
+		}));
 
-  useEffect(() => {
-    todoInput.current.addEventListener('submit', handleAdd);
-    return () => {
-      todoInput.current.removeEventListener('submit', handleAdd);
-    }
-  }, [handleAdd]);
+		editDialog.current.show();
+	}, [todos, setTodoBeingEditted]);
 
-  useEffect(() => {
-    addButton.current.addEventListener("click", handleAdd);
-    return () => {
-      addButton.current.removeEventListener("click", handleAdd);
-    }
-  }, [handleAdd]);
+	useEffect(() => {
+		todoInput.current.addEventListener('submit', handleAdd);
+		return () => {
+			todoInput.current.removeEventListener('submit', handleAdd);
+		}
+	}, [handleAdd]);
 
-  useEffect(() => {
-    cancelBtn.current.addEventListener("click", handleCancel);
-    return () => {
-      cancelBtn.current.removeEventListener("click", handleCancel);
-    }
-  }, [handleCancel]);
+	useEffect(() => {
+		addButton.current.addEventListener("click", handleAdd);
+		return () => {
+			addButton.current.removeEventListener("click", handleAdd);
+		}
+	}, [handleAdd]);
 
-  useEffect(() => {
-    saveBtn.current.addEventListener("click", handleSave);
-    return () => {
-      saveBtn.current.removeEventListener("click", handleSave);
-    }
-  }, [handleSave]);
+	useEffect(() => {
+		cancelBtn.current.addEventListener("click", handleCancel);
+		return () => {
+			cancelBtn.current.removeEventListener("click", handleCancel);
+		}
+	}, [handleCancel]);
 
-  return (
-      <div className="app">
-        <ui5-shellbar
-          primary-title="UI5 Web Components React Sample Application">
-            <img alt="logo" slot="logo" height="30px" src={logo} />
-        </ui5-shellbar>
-        <section className="app-content">
-          <div className="create-todo-wrapper">
-            <ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
-            <ui5-date-picker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
-            <ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
-          </div>
+	useEffect(() => {
+		saveBtn.current.addEventListener("click", handleSave);
+		return () => {
+			saveBtn.current.removeEventListener("click", handleSave);
+		}
+	}, [handleSave]);
 
-          <div className="list-todos-wrapper">
-            <TodoList
-              items={todos.filter(todo => !todo.done)}
-              selectionChange={handleDone}
-              remove={handleRemove}
-              edit={handleEdit}
-            >
-            </TodoList>
+	return (
+		<div className="app">
+			<ui5-shellbar primary-title="UI5 Web Components React Sample Application">
+				<img alt="logo" slot="logo" height="30px" src={logo} />
+			</ui5-shellbar>
+			<section className="app-content">
+				<div className="create-todo-wrapper">
+					<ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
+					<ui5-date-picker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
+					<ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
+				</div>
 
-            <ui5-panel header-text="Completed tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
-              <TodoList
-                items={todos.filter(todo => todo.done)}
-                selectionChange={handleUnDone}
-                remove={handleRemove}
-                edit={handleEdit}
-              >
-              </TodoList>
-            </ui5-panel>
-          </div>
-        </section>
-        <ui5-dialog header-text="Edit Todo item" ref={editDialog}>
-          <div className="dialog-content">
-            <div className="edit-wrapper">
-                <ui5-label>Title:</ui5-label>
-                <ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
-            </div>
+				<div className="list-todos-wrapper">
+					<TodoList
+						items={todos.filter(todo => !todo.done)}
+						selectionChange={handleDone}
+						remove={handleRemove}
+						edit={handleEdit}
+					>
+					</TodoList>
 
-            <div className="edit-wrapper date-edit-fields">
-                <ui5-label>Date:</ui5-label>
-                <ui5-date-picker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-date-picker>
-            </div>
-          </div>
-            <div className="dialog-footer" >
-              <ui5-button design="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
-              <ui5-button design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
-            </div>
-        </ui5-dialog>
-      </div>
-  );
+					<ui5-panel header-text="Completed tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
+						<TodoList
+						items={todos.filter(todo => todo.done)}
+						selectionChange={handleUnDone}
+						remove={handleRemove}
+						edit={handleEdit}
+						>
+						</TodoList>
+					</ui5-panel>
+				</div>
+			</section>
+			<ui5-dialog header-text="Edit Todo" ref={editDialog}>
+				<div className="dialog-content">
+					<div className="edit-wrapper">
+						<ui5-label>Title:</ui5-label>
+						<ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
+					</div>
+
+					<div className="edit-wrapper date-edit-fields">
+						<ui5-label>Date:</ui5-label>
+						<ui5-date-picker format-pattern="dd/MM/yyyy" value={todoBeingEditted.deadline} ref={dateEditInput}></ui5-date-picker>
+					</div>
+				</div>
+				<div className="dialog-footer" >
+					<ui5-button class="dialog-footer-btn--cancel" design="Transparent" ref={cancelBtn}>Cancel</ui5-button>{/*close dialog*/}
+					<ui5-button class="dialog-footer-btn--save" design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
+				</div>
+			</ui5-dialog>
+		</div>
+	);
 }
 
 export default App;

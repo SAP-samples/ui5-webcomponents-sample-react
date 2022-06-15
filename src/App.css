@@ -1,100 +1,109 @@
 .app {
-  height: 100%;
+	height: 100%;
 }
 
 .header-toolbar {
-  position:sticky;
-  z-index: 42;
-  background-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 5px -5px #0a6ed1;
+	position: sticky;
+	z-index: 42;
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 4px 5px -5px #0a6ed1;
 }
 
 .ui5-logo {
-  height: 2rem;
-  margin-left: 2rem;
+	height: 2rem;
+	margin-left: 2rem;
 }
 
 .app-title {
-  margin-left: 1rem;
+	margin-left: 1rem;
 }
 
 .app-content {
-  height: calc(100% - 3rem);
-  padding: 0 1rem;
-  width: calc(100% - 2rem);
+	height: calc(100% - 3rem);
+	padding: 0 1rem;
+	width: calc(100% - 2rem);
 }
 
 .create-todo-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0.5rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #b3b3b3;
-  box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 0.5rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid #b3b3b3;
+	box-sizing: border-box;
 }
 
 .add-todo-element-width {
-  width: auto;
+	width: auto;
 }
 
 #add-input {
-  flex: auto;
+	flex: auto;
 }
 
 #date-picker {
-  margin: 0 0.5rem 0 0.5rem;
+	margin: 0 0.5rem 0 0.5rem;
 }
 
 .li-content {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .li-content-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .edit-btn {
-  margin-right: 1rem;
+	margin-right: 1rem;
 }
 
 .dialog-content {
-  max-width: 320px;
-  padding: 2rem 2rem;
-}
-
-.dialog-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.25rem 0.25rem 0 0.25rem;
-  border-top: 1px solid #d9d9d9;
-}
-
-.title-textarea {
-  height: 100px;
-  display: inline-block;
-  width: 100%;
+	max-width: 320px;
+	padding: 2rem 2rem;
 }
 
 .date-edit-fields {
-  margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.dialog-footer {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0.25rem 0.25rem 0 0.25rem;
+	border-top: 1px solid #d9d9d9;
+}
+
+.dialog-footer-btn--cancel {
+	margin-inline-end: 0.25rem;
+}
+
+.title-textarea {
+	height: 100px;
+	display: inline-block;
+	width: 100%;
+}
+
+.date-edit-fields {
+	margin-top: 1rem;
 }
 
 @media(max-width: 600px) {
-  .create-todo-wrapper {
-    flex-direction: column;
-  }
+	.create-todo-wrapper {
+		flex-direction: column;
+	}
 
-  .add-todo-element-width  {
-    width: 100%;
-  }
+	.add-todo-element-width {
+		width: 100%;
+	}
 
-  #date-picker {
-    margin: 0.5rem 0 0.5rem 0;
-  }
+	#date-picker {
+		margin: 0.5rem 0 0.5rem 0;
+	}
 }

@@ -313,14 +313,14 @@ module.exports = {
               'sass-loader'
             ),
           },
-          {
-            test: /cldr\/.*\.json$/,
-            loader: 'file-loader',
-            options: {
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
-            type: 'javascript/auto'
-          },
+        //   {
+        //     test: /cldr\/.*\.json$/,
+        //     loader: 'file-loader',
+        //     options: {
+        //       name: 'static/media/[name].[hash:8].[ext]',
+        //     },
+        //     type: 'javascript/auto'
+        //   },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.
