@@ -38,7 +38,7 @@ function App () {
 			text: "Go to the gym",
 			id: 3,
 			deadline: "24/7/2018",
-			done: true
+			done: false
 		},
 		{
 			text: "Buy milk",
@@ -50,7 +50,7 @@ function App () {
 			text: "Eat some fruits",
 			id: 5,
 			deadline: "29/7/2018",
-			done: false
+			done: true
 		}
 	]);
 	const [todoBeingEditted, setTodoBeingEditted] = useState({
@@ -168,7 +168,7 @@ function App () {
 	return (
 		<div className="app">
 			<ui5-shellbar primary-title="UI5 Web Components React Sample Application">
-				<img alt="logo" slot="logo" height="30px" src={logo} />
+				<img className="app-header-logo" alt="logo" slot="logo" src={logo} />
 			</ui5-shellbar>
 			<section className="app-content">
 				<div className="create-todo-wrapper">
@@ -186,7 +186,7 @@ function App () {
 					>
 					</TodoList>
 
-					<ui5-panel header-text="Completed tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
+					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
 						<TodoList
 						items={todos.filter(todo => todo.done)}
 						selectionChange={handleUnDone}

@@ -9,9 +9,8 @@
 	box-shadow: 0 4px 5px -5px #0a6ed1;
 }
 
-.ui5-logo {
+.app-header-logo {
 	height: 2rem;
-	margin-left: 2rem;
 }
 
 .app-title {
