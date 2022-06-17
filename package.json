@@ -22,6 +22,7 @@
     "@ui5/webcomponents": "^1.4.0",
     "@ui5/webcomponents-base": "^1.4.0",
     "@ui5/webcomponents-fiori": "^1.4.0",
+    "@ui5/webcomponents-icons": "^1.4.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
