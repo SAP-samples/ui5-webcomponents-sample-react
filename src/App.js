@@ -9,14 +9,18 @@ import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
 import "@ui5/webcomponents/dist/List";
+import "@ui5/webcomponents/dist/Label";
 import "@ui5/webcomponents/dist/CustomListItem";
 import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Dialog";
-import "@ui5/webcomponents/dist/Label";
+import "@ui5/webcomponents/dist/Popover";
+import "@ui5/webcomponents/dist/Tab";
+import "@ui5/webcomponents/dist/TabContainer";
 import "@ui5/webcomponents/dist/TextArea";
 import "@ui5/webcomponents-fiori/dist/ShellBar";
+import "@ui5/webcomponents-fiori/dist/ShellBarItem";
 import "@ui5/webcomponents-fiori/dist/Assets";
-
+import "@ui5/webcomponents-icons/dist/palette.js";
 
 setTheme("sap_horizon");
 function App () {
@@ -59,18 +63,29 @@ function App () {
 		date: ""
 	});
 
-	const addButton = useRef(),
+	const themeChangeItem = useRef(),
+		addButton = useRef(),
 		todoInput = useRef(),
 		todoDeadline = useRef(),
 		editDialog = useRef(),
 		cancelBtn = useRef(),
 		saveBtn = useRef(),
 		titleEditInput = useRef(),
-		dateEditInput = useRef();
+		dateEditInput = useRef(),
+		themeSelect = useRef();
 
 	function handleCancel() {
 		editDialog.current.close();
 	}
+
+	const handleThemeSettingsToggle = useCallback(event => {
+		window["theme-settings-popover"].showAt(event.detail.targetRef);
+	}, []);
+
+	const handleThemeChange = useCallback(event => {
+		const selectedTheme = event.detail.selectedItems[0].getAttribute("data-theme");
+		setTheme(selectedTheme);
+	}, []);
 
 	const handleSave = useCallback(() => {
 		const edittedText = titleEditInput.current.value;
@@ -165,11 +180,35 @@ function App () {
 		}
 	}, [handleSave]);
 
+	useEffect(() => {
+		themeChangeItem.current.addEventListener("click", handleThemeSettingsToggle);
+		return () => {
+			themeChangeItem.current.removeEventListener("click", handleThemeSettingsToggle);
+		}
+	}, [handleThemeSettingsToggle]);
+
+	useEffect(() => {
+		themeSelect.current.addEventListener("selection-change", handleThemeChange);
+		return () => {
+			themeSelect.current.removeEventListener("selection-change", handleThemeChange);
+		}
+	}, [handleThemeChange]);
+
 	return (
 		<div className="app">
-			<ui5-shellbar primary-title="UI5 Web Components React Sample Application">
+			<ui5-shellbar primary-title="UI5 Web Components React Sample Application"
+				show-notifications
+				notifications-count="2">
 				<img className="app-header-logo" alt="logo" slot="logo" src={logo} />
+				<ui5-shellbar-item icon="palette" text="Theme" ref={themeChangeItem}></ui5-shellbar-item>
+
+				<ui5-avatar slot="profile" size="XS" initials="JD"></ui5-avatar>
 			</ui5-shellbar>
+
+			<ui5-tabcontainer fixed collapsed>
+				<ui5-tab text="My Todos"></ui5-tab>
+			</ui5-tabcontainer>
+
 			<section className="app-content">
 				<div className="create-todo-wrapper">
 					<ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
@@ -178,13 +217,15 @@ function App () {
 				</div>
 
 				<div className="list-todos-wrapper">
-					<TodoList
-						items={todos.filter(todo => !todo.done)}
-						selectionChange={handleDone}
-						remove={handleRemove}
-						edit={handleEdit}
-					>
-					</TodoList>
+					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter(todo => !todo.done).length || undefined}>
+						<TodoList
+							items={todos.filter(todo => !todo.done)}
+							selectionChange={handleDone}
+							remove={handleRemove}
+							edit={handleEdit}
+						>
+						</TodoList>
+					</ui5-panel>
 
 					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
 						<TodoList
@@ -197,6 +238,7 @@ function App () {
 					</ui5-panel>
 				</div>
 			</section>
+
 			<ui5-dialog header-text="Edit Todo" ref={editDialog}>
 				<div className="dialog-content">
 					<div className="edit-wrapper">
@@ -214,6 +256,25 @@ function App () {
 					<ui5-button class="dialog-footer-btn--save" design="Emphasized" ref={saveBtn}>Save</ui5-button>{/*save dialog info*/}
 				</div>
 			</ui5-dialog>
+
+			<ui5-popover
+					id="theme-settings-popover"
+					class="app-bar-theming-popover"
+					placement-type="Bottom"
+					horizontal-align="Right"
+					header-text="Theme"
+				>
+					<ui5-list ref={themeSelect} mode="SingleSelect">
+						<ui5-li icon="palette" data-theme="sap_horizon" selected>SAP Horizon Morning</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_horizon_dark">SAP Horizon Evening</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_horizon_hcb">SAP Horizon HCB</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_horizon_hcw">SAP Horizon HCW</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_fiori_3">SAP Quartz Light</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_fiori_3_dark">SAP Quartz Dark</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_fiori_3_hcb">SAP Quartz HCB</ui5-li>
+						<ui5-li icon="palette" data-theme="sap_fiori_3_hcw">SAP Quartz HCW</ui5-li>
+					</ui5-list>
+				</ui5-popover>
 		</div>
 	);
 }
