@@ -4,6 +4,7 @@ import './App.css';
 import TodoList from './TodoList';
 
 import {setTheme } from "@ui5/webcomponents-base/dist/config/Theme";
+import "@ui5/webcomponents-base/dist/features/F6Navigation";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
