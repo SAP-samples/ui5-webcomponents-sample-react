@@ -37,9 +37,17 @@ html, body {
 	align-items: center;
 	justify-content: center;
 	padding: 2rem 1rem;
-	margin: 1rem 0;
+	margin: 2rem 0;
 	box-sizing: border-box;
 	background-color: var(--sapObjectHeader_Background);
+}
+
+.list-todos-wrapper {
+	margin: 2rem 0;
+}
+
+.list-todos-panel {
+	margin: 2rem 0;
 }
 
 .add-todo-element-width {

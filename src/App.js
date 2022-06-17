@@ -211,13 +211,14 @@ function App () {
 
 			<section className="app-content">
 				<div className="create-todo-wrapper">
-					<ui5-input placeholder="My Todo ..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
+					<ui5-input placeholder="Typa a task..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
 					<ui5-date-picker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
 					<ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized">Add Todo</ui5-button>
 				</div>
 
 				<div className="list-todos-wrapper">
-					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter(todo => !todo.done).length || undefined}>
+					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter(todo => !todo.done).length || undefined}
+						class="list-todos-panel">
 						<TodoList
 							items={todos.filter(todo => !todo.done)}
 							selectionChange={handleDone}
@@ -227,7 +228,8 @@ function App () {
 						</TodoList>
 					</ui5-panel>
 
-					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}>
+					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter(todo => todo.done).length || undefined}
+						class="list-todos-panel">
 						<TodoList
 						items={todos.filter(todo => todo.done)}
 						selectionChange={handleUnDone}
