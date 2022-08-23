@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
 	height: 100%;
 }
 
@@ -8,6 +9,10 @@ html, body {
 }
 
 .app-bar-theming-popover {
+	width: 250px;
+}
+
+.app-bar-profile-popover {
 	width: 250px;
 }
 
@@ -23,7 +28,7 @@ html, body {
 }
 
 .app-title {
-	margin-left: 1rem;
+	margin-inline-start: 1rem;
 }
 
 .app-content {
@@ -80,7 +85,7 @@ html, body {
 }
 
 .edit-btn {
-	margin-right: 1rem;
+	margin-inline-end: 1rem;
 }
 
 .dialog-content {
@@ -93,11 +98,22 @@ html, body {
 	flex-direction: column;
 }
 
+#settings-dialog {
+	max-width: 300px;
+}
+
 .dialog-footer {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0.25rem 0.25rem 0 0.25rem;
 	border-top: 1px solid #d9d9d9;
+}
+
+.dialog-button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 0.625rem;
+	margin-bottom: -0.425rem;
 }
 
 .dialog-footer-btn--cancel {
@@ -114,7 +130,7 @@ html, body {
 	margin-top: 1rem;
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
 	.create-todo-wrapper {
 		flex-direction: column;
 	}
@@ -124,6 +140,79 @@ html, body {
 	}
 
 	#date-picker {
-		margin: 0.5rem 0 0.5rem 0;
+		margin: 0.25rem 0 0.25rem 0;
+		width: 100%;
 	}
+
+	#add-input {
+		margin-bottom: 0.25rem;
+		width: 100%;
+	}
+
+	#add-button {
+		margin-top: 0.25rem;
+		width: 100%;
+	}
+}
+
+.profile-settings,
+.help-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.help-header {
+	margin-inline-end: 2.5rem;
+}
+
+.profile-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-inline-start: 1rem;
+	margin-inline-end: 2rem;
+}
+
+.profile-settings-list {
+	margin-top: 1.25rem;
+}
+
+.aligned {
+	align-items: center;
+	gap: 0.725rem;
+}
+
+.help-dialog-text {
+	font-size: 0.875rem;
+}
+
+.profile-rtl-switch {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#header-title-align {
+	margin: 1rem 0;
+	gap: 0.225rem;
+}
+
+#header-logo-align {
+	margin: 0.225rem 3.225rem 0.225rem 0;
+	align-items: center;
+	gap: 0.435rem;
+}
+
+#help-dialog::part(header) {
+	justify-content: flex-start;
+}
+
+#completed-tasks {
+	margin-top: 2rem;
+}
+
+hr {
+	margin: 0.75rem 0;
 }
