@@ -4,6 +4,7 @@
 
 # UI5 Web Components React Sample Application
 
+
 [React](https://reactjs.org/) sample application to demonstrate the usage of the [UI5 Web Components](https://github.com/SAP/ui5-webcomponents). It shows how to bind properties, to subscribe to events, using nested components and the bootstrapped React build.
  
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -84,7 +85,7 @@ No limitations known.
 No major bugs known.
 
 ## Support
-We welcome all comments, suggestions, questions, and bug reports. Please follow our [Support Guidelines](https://github.com/SAP/ui5-webcomponents/blob/main/SUPPORT.md#-content) on how to report an issue, or chat with us in the `#webcomponents` channel of the [OpenUI5 Community Slack](https://join-ui5-slack.herokuapp.com/).
+We welcome all comments, suggestions, questions, and bug reports. Please follow our [Support Guidelines](https://github.com/SAP/ui5-webcomponents/blob/main/SUPPORT.md#-content) on how to report an issue, or chat with us in the `#webcomponents` channel of the [OpenUI5 Community Slack](https://ui5-slack-invite.cfapps.eu10.hana.ondemand.com/).
 
 ## Contribute to UI5 Web Components
 Please check our [Contribution Guidelines](https://github.com/SAP/ui5-webcomponents/blob/main/CONTRIBUTING.md).
