@@ -342,17 +342,17 @@ function App() {
 				<div className="create-todo-wrapper">
 					<ui5-input placeholder="Type a task..." ref={todoInput} className="add-todo-element-width" id="add-input"></ui5-input>
 					<ui5-date-picker format-pattern="dd/MM/yyyy" className="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
-					<ui5-button className="add-todo-element-width" ref={addButton} design="Emphasized" id="add-button">
+					<ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized" id="add-button">
 						Add Todo
 					</ui5-button>
 				</div>
 
 				<div className="list-todos-wrapper">
-					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter((todo) => !todo.done).length || undefined} className="list-todos-panel">
+					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter((todo) => !todo.done).length || undefined} class="list-todos-panel">
 						<TodoList items={todos.filter((todo) => !todo.done)} selectionChange={handleDone} remove={handleRemove} edit={handleEdit}></TodoList>
 					</ui5-panel>
 
-					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter((todo) => todo.done).length || undefined} className="list-todos-panel" id="completed-tasks">
+					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter((todo) => todo.done).length || undefined} class="list-todos-panel" id="completed-tasks">
 						<TodoList items={todos.filter((todo) => todo.done)} selectionChange={handleUnDone} remove={handleRemove} edit={handleEdit}></TodoList>
 					</ui5-panel>
 				</div>
@@ -362,7 +362,7 @@ function App() {
 				<div className="dialog-content">
 					<div className="edit-wrapper">
 						<ui5-label>Title:</ui5-label>
-						<ui5-textarea className="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
+						<ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
 					</div>
 
 					<div className="edit-wrapper date-edit-fields">
@@ -372,18 +372,18 @@ function App() {
 				</div>
 
 				<div className="dialog-footer">
-					<ui5-button className="dialog-footer-btn--cancel" design="Transparent" ref={cancelBtn}>
+					<ui5-button class="dialog-footer-btn--cancel" design="Transparent" ref={cancelBtn}>
 						Cancel
 					</ui5-button>
 					{/*close dialog*/}
-					<ui5-button className="dialog-footer-btn--save" design="Emphasized" ref={saveBtn}>
+					<ui5-button class="dialog-footer-btn--save" design="Emphasized" ref={saveBtn}>
 						Save
 					</ui5-button>
 					{/*save dialog info*/}
 				</div>
 			</ui5-dialog>
 
-			<ui5-popover ref={themeSettingsPopover} className="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
+			<ui5-popover ref={themeSettingsPopover} class="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
 				<ui5-list ref={themeSelect} selection-mode="Single">
 					<ui5-li icon="palette" data-theme="sap_horizon" selected>
 						SAP Horizon Morning
@@ -412,7 +412,7 @@ function App() {
 				</ui5-list>
 			</ui5-popover>
 
-			<ui5-popover ref={profilePopover} className="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
+			<ui5-popover ref={profilePopover} class="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
 				<div className="profile-settings">
 					<ui5-avatar size="M" initials="JD"></ui5-avatar>
 					<div className="profile-text">
@@ -440,7 +440,7 @@ function App() {
 				<div>
 					<div className="profile-rtl-switch centered">
 						<div className="profile-rtl-switch-title">
-							<ui5-label className="profile-rtl-switch-text">RTL</ui5-label>
+							<ui5-label class="profile-rtl-switch-text">RTL</ui5-label>
 						</div>
 						<ui5-switch ref={rtlSwitch}></ui5-switch>
 					</div>
@@ -448,7 +448,7 @@ function App() {
 
 				<div className="profile-rtl-switch centered">
 					<div className="profile-rtl-switch-title">
-						<ui5-label className="profile-rtl-switch-text">Compact</ui5-label>
+						<ui5-label class="profile-rtl-switch-text">Compact</ui5-label>
 					</div>
 					<ui5-switch ref={contentDensitySwitch}></ui5-switch>
 				</div>
@@ -481,7 +481,9 @@ function App() {
 					<b>UI version</b>: SAP Fiori <br></br>
 					<b>Edition</b>: Enterprise <br></br>
 					<b>Admin version</b>: React Admin <br></br>
-					<hr></hr>
+				</p>
+				<hr></hr>
+				<p className="help-dialog-text">
 					For more information, please visit our{" "}
 					<a href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target="_blank" rel="noreferrer">
 						documentation
