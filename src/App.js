@@ -12,7 +12,7 @@ import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
 import "@ui5/webcomponents/dist/List";
 import "@ui5/webcomponents/dist/Label";
-import "@ui5/webcomponents/dist/CustomListItem";
+import "@ui5/webcomponents/dist/ListItemCustom";
 import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Dialog";
 import "@ui5/webcomponents/dist/Popover";
@@ -87,22 +87,27 @@ function App() {
 		dialogButton = useRef(),
 		dialogHelpCloseButton = useRef(),
 		rtlSwitch = useRef(),
-		contentDensitySwitch = useRef();
+		contentDensitySwitch = useRef(),
+		profilePopover = useRef(),
+		settingsDialog = useRef(),
+		helpDialog = useRef(),
+		themeSettingsPopover = useRef();
 
-	function handleCancel() {
-		editDialog.current.close();
-	}
+	const handleCancel = useCallback(() => {
+		editDialog.current.open = false;
+	}, []);
 
 	const handleProfileClick = useCallback((event) => {
-		window["profile-pop"].showAt(event.detail.targetRef);
+		profilePopover.current.opener = event.detail.targetRef;
+		profilePopover.current.open = true;
 	}, []);
 
 	const handleSettingsDialogCloseButtonClick = useCallback(() => {
-		window["settings-dialog"].close();
+		settingsDialog.current.open = false;
 	}, []);
 
 	const handleHelpDialogCloseButtonClick = useCallback(() => {
-		window["help-dialog"].close();
+		helpDialog.current.open = false;
 	}, []);
 
 	const handleRtlSwitchChange = useCallback((event) => {
@@ -121,14 +126,15 @@ function App() {
 	const handleProfileSettingsSelect = useCallback((event) => {
 		const selectedKey = event.detail.item.getAttribute("data-key");
 		if (selectedKey === "settings") {
-			window["settings-dialog"].show(event.detail.targetRef);
+			settingsDialog.current.open = true;
 		} else if (selectedKey === "help") {
-			window["help-dialog"].show(event.detail.targetRef);
+			helpDialog.current.open = true;
 		}
 	}, []);
 
 	const handleThemeSettingsToggle = useCallback((event) => {
-		window["theme-settings-popover"].showAt(event.detail.targetRef);
+		themeSettingsPopover.current.opener = event.detail.targetRef;
+		themeSettingsPopover.current.open = true;
 	}, []);
 
 	const handleThemeChange = useCallback((event) => {
@@ -150,7 +156,7 @@ function App() {
 			})
 		);
 
-		editDialog.current.close();
+		editDialog.current.open = false;
 	}, [todoBeingEditted, setTodos]);
 
 	const handleDone = useCallback(
@@ -194,111 +200,129 @@ function App() {
 		]);
 	}, [setTodos]);
 
-	const handleRemove = useCallback(
-		(id) => {
-			setTodos((todos) => todos.filter((todo) => todo.id !== id));
-		},
-		[setTodos]
-	);
+	const handleRemove = useCallback((id) => setTodos((todos) => todos.filter((todo) => todo.id !== id)), [setTodos]);
 
 	const handleEdit = useCallback(
 		(id) => {
 			const todoObj = todos.filter((todo) => {
 				return todo.id === id;
 			})[0];
-
 			setTodoBeingEditted(() => ({
 				id: id,
 				text: todoObj.text,
 				deadline: todoObj.deadline,
 			}));
 
-			editDialog.current.show();
+			editDialog.current.open = true;
 		},
 		[todos, setTodoBeingEditted]
 	);
 
 	useEffect(() => {
-		todoInput.current.addEventListener("submit", handleAdd);
+		const currentTodoInput = todoInput.current;
+
+		currentTodoInput.addEventListener("submit", handleAdd);
 		return () => {
-			todoInput.current.removeEventListener("submit", handleAdd);
+			currentTodoInput.removeEventListener("submit", handleAdd);
 		};
 	}, [handleAdd]);
 
 	useEffect(() => {
-		profileSettingsSelect.current.addEventListener("item-click", handleProfileSettingsSelect);
+		const currentProfileSettingsSelect = profileSettingsSelect.current;
+
+		currentProfileSettingsSelect.addEventListener("item-click", handleProfileSettingsSelect);
 		return () => {
-			profileSettingsSelect.current.removeEventListener("item-click", handleProfileSettingsSelect);
+			currentProfileSettingsSelect.removeEventListener("item-click", handleProfileSettingsSelect);
 		};
 	}, [handleProfileSettingsSelect]);
 
 	useEffect(() => {
-		addButton.current.addEventListener("click", handleAdd);
+		const currentAddBtn = addButton.current;
+
+		currentAddBtn.addEventListener("click", handleAdd);
 		return () => {
-			addButton.current.removeEventListener("click", handleAdd);
+			currentAddBtn.removeEventListener("click", handleAdd);
 		};
 	}, [handleAdd]);
 
 	useEffect(() => {
-		cancelBtn.current.addEventListener("click", handleCancel);
+		const currentCancelBtn = cancelBtn.current;
+
+		currentCancelBtn.addEventListener("click", handleCancel);
 		return () => {
-			cancelBtn.current.removeEventListener("click", handleCancel);
+			currentCancelBtn.removeEventListener("click", handleCancel);
 		};
 	}, [handleCancel]);
 
 	useEffect(() => {
-		saveBtn.current.addEventListener("click", handleSave);
+		const currentSaveBtn = saveBtn.current;
+
+		currentSaveBtn.addEventListener("click", handleSave);
 		return () => {
-			saveBtn.current.removeEventListener("click", handleSave);
+			currentSaveBtn.removeEventListener("click", handleSave);
 		};
 	}, [handleSave]);
 
 	useEffect(() => {
-		themeChangeItem.current.addEventListener("click", handleThemeSettingsToggle);
+		const currentThemChangeItem = themeChangeItem.current;
+
+		currentThemChangeItem.addEventListener("click", handleThemeSettingsToggle);
 		return () => {
-			themeChangeItem.current.removeEventListener("click", handleThemeSettingsToggle);
+			currentThemChangeItem.removeEventListener("click", handleThemeSettingsToggle);
 		};
 	}, [handleThemeSettingsToggle]);
 
 	useEffect(() => {
-		themeSelect.current.addEventListener("selection-change", handleThemeChange);
+		const currentThemeSelect = themeSelect.current;
+
+		currentThemeSelect.addEventListener("selection-change", handleThemeChange);
 		return () => {
-			themeSelect.current.removeEventListener("selection-change", handleThemeChange);
+			currentThemeSelect.removeEventListener("selection-change", handleThemeChange);
 		};
 	}, [handleThemeChange]);
 
 	useEffect(() => {
-		shellBar.current.addEventListener("profile-click", handleProfileClick);
+		const currentShellBar = shellBar.current;
+
+		currentShellBar.addEventListener("profile-click", handleProfileClick);
 		return () => {
-			shellBar.current.removeEventListener("profile-click", handleProfileClick);
+			currentShellBar.removeEventListener("profile-click", handleProfileClick);
 		};
 	}, [handleProfileClick]);
 
 	useEffect(() => {
-		dialogButton.current.addEventListener("click", handleSettingsDialogCloseButtonClick);
+		const currentDialogButton = dialogButton.current;
+
+		currentDialogButton.addEventListener("click", handleSettingsDialogCloseButtonClick);
 		return () => {
-			dialogButton.current.removeEventListener("click", handleSettingsDialogCloseButtonClick);
+			currentDialogButton.removeEventListener("click", handleSettingsDialogCloseButtonClick);
 		};
 	}, [handleSettingsDialogCloseButtonClick]);
 
 	useEffect(() => {
-		dialogHelpCloseButton.current.addEventListener("click", handleHelpDialogCloseButtonClick);
+		const currentDialogHelpCloseButton = dialogHelpCloseButton.current;
+
+		currentDialogHelpCloseButton.addEventListener("click", handleHelpDialogCloseButtonClick);
 		return () => {
-			dialogHelpCloseButton.current.removeEventListener("click", handleHelpDialogCloseButtonClick);
+			currentDialogHelpCloseButton.removeEventListener("click", handleHelpDialogCloseButtonClick);
 		};
 	}, [handleHelpDialogCloseButtonClick]);
 
 	useEffect(() => {
-		rtlSwitch.current.addEventListener("change", handleRtlSwitchChange);
+		const currentRtlSwitch = rtlSwitch.current;
+
+		currentRtlSwitch.addEventListener("change", handleRtlSwitchChange);
 		return () => {
-			rtlSwitch.current.removeEventListener("change", handleRtlSwitchChange);
+			currentRtlSwitch.removeEventListener("change", handleRtlSwitchChange);
 		};
 	}, [handleRtlSwitchChange]);
 
 	useEffect(() => {
-		contentDensitySwitch.current.addEventListener("change", handleContentDensitySwitchChange);
+		const currentContentDensitySwitch = contentDensitySwitch.current;
+
+		currentContentDensitySwitch.addEventListener("change", handleContentDensitySwitchChange);
 		return () => {
-			contentDensitySwitch.current.removeEventListener("change", handleContentDensitySwitchChange);
+			currentContentDensitySwitch.removeEventListener("change", handleContentDensitySwitchChange);
 		};
 	}, [handleContentDensitySwitchChange]);
 
@@ -310,7 +334,7 @@ function App() {
 				<ui5-avatar slot="profile" size="XS" initials="JD"></ui5-avatar>
 			</ui5-shellbar>
 
-			<ui5-tabcontainer fixed collapsed>
+			<ui5-tabcontainer collapsed>
 				<ui5-tab text="My Todos"></ui5-tab>
 			</ui5-tabcontainer>
 
@@ -359,8 +383,8 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-popover id="theme-settings-popover" className="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
-				<ui5-list ref={themeSelect} mode="SingleSelect">
+			<ui5-popover ref={themeSettingsPopover} className="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
+				<ui5-list ref={themeSelect} selection-mode="Single">
 					<ui5-li icon="palette" data-theme="sap_horizon" selected>
 						SAP Horizon Morning
 					</ui5-li>
@@ -388,7 +412,7 @@ function App() {
 				</ui5-list>
 			</ui5-popover>
 
-			<ui5-popover id="profile-pop" className="app-bar-profile-popover" placement-type="Bottom" horizontal-align="Right">
+			<ui5-popover ref={profilePopover} className="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
 				<div className="profile-settings">
 					<ui5-avatar size="M" initials="JD"></ui5-avatar>
 					<div className="profile-text">
@@ -398,7 +422,7 @@ function App() {
 				</div>
 
 				<div className="profile-settings-list">
-					<ui5-list mode="SingleSelect" separators="None" ref={profileSettingsSelect}>
+					<ui5-list selection-mode="Single" separators="None" ref={profileSettingsSelect}>
 						<ui5-li icon="settings" data-key="settings">
 							Settings
 						</ui5-li>
@@ -412,7 +436,7 @@ function App() {
 				</div>
 			</ui5-popover>
 
-			<ui5-dialog id="settings-dialog" header-text="Profile Settings" draggable>
+			<ui5-dialog ref={settingsDialog} header-text="Profile Settings" draggable>
 				<div>
 					<div className="profile-rtl-switch centered">
 						<div className="profile-rtl-switch-title">
@@ -436,7 +460,7 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-dialog id="help-dialog" header-text="">
+			<ui5-dialog ref={helpDialog}>
 				<div slot="header" className="help-header" id="header-title-align">
 					<ui5-icon name="sys-help"></ui5-icon>
 					Help
@@ -444,7 +468,9 @@ function App() {
 
 				<div className="help-header" id="header-logo-align">
 					<img className="app-header-logo" alt="logo" slot="logo" src={logo} />
-					<ui5-title level="H5">UI5 Web Components React Sample App</ui5-title>
+					<ui5-title level="H5" wrapping-type="None">
+						UI5 Web Components React Sample App
+					</ui5-title>
 				</div>
 
 				<p className="help-dialog-text">
@@ -457,7 +483,7 @@ function App() {
 					<b>Admin version</b>: React Admin <br></br>
 					<hr></hr>
 					For more information, please visit our{" "}
-					<a href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target={"_blank"}>
+					<a href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target="_blank" rel="noreferrer">
 						documentation
 					</a>
 					.
