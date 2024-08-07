@@ -1,7 +1,7 @@
 {
-	"name": "my-react-ts2",
-	"private": true,
-	"version": "0.0.0",
+	"name": "ui5-webcomponents-sample-react",
+	"version": "0.7.0",
+	"homepage": "./",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",

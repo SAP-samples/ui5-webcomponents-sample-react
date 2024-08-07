@@ -1,5 +1,5 @@
 import type Button from "@ui5/webcomponents/dist/Button.js";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type TODOItem = {
 	text: string;

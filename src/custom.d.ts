@@ -19,11 +19,11 @@ import type Switch from "@ui5/webcomponents/dist/Switch.js";
 import type Icon from "@ui5/webcomponents/dist/Icon.js";
 import ListItemCustom from "@ui5/webcomponents/dist/ListItemCustom.js";
 
-import { DOMAttributes } from "react";
+import { DOMAttributes, useRef, Key } from "react";
 
-type CustomElementAttrs<T> = DOMAttributes<T> & { key: string | number; ref: React.RefObject<T>; class: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomElement<T> = Partial<T & CustomElementAttrs<T> & { children: any }>;
+type CustomElementAttrs<T> = DOMAttributes<T> & { key: Key; ref: ReturnType<typeof useRef<T>>; class: string };
 
 declare global {
 	namespace JSX {

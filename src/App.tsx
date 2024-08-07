@@ -1,28 +1,28 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import logo from "./logo.png";
 import "./App.css";
 import TodoList from "./TodoList";
 import applyDirection from "@ui5/webcomponents-base/dist/locale/applyDirection.js";
 
-import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme";
-import "@ui5/webcomponents-base/dist/features/F6Navigation";
-import "@ui5/webcomponents/dist/Button";
-import "@ui5/webcomponents/dist/Title";
-import "@ui5/webcomponents/dist/Input";
-import "@ui5/webcomponents/dist/DatePicker";
-import "@ui5/webcomponents/dist/List";
-import "@ui5/webcomponents/dist/Label";
-import "@ui5/webcomponents/dist/ListItemCustom";
-import "@ui5/webcomponents/dist/Panel";
-import "@ui5/webcomponents/dist/Dialog";
-import "@ui5/webcomponents/dist/Popover";
-import "@ui5/webcomponents/dist/Tab";
-import "@ui5/webcomponents/dist/TabContainer";
-import "@ui5/webcomponents/dist/TextArea";
-import "@ui5/webcomponents/dist/Switch";
-import "@ui5/webcomponents-fiori/dist/ShellBar";
-import "@ui5/webcomponents-fiori/dist/ShellBarItem";
-import "@ui5/webcomponents-fiori/dist/Assets";
+import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
+import "@ui5/webcomponents-base/dist/features/F6Navigation.js";
+import "@ui5/webcomponents/dist/Button.js";
+import "@ui5/webcomponents/dist/Title.js";
+import "@ui5/webcomponents/dist/Input.js";
+import "@ui5/webcomponents/dist/DatePicker.js";
+import "@ui5/webcomponents/dist/List.js";
+import "@ui5/webcomponents/dist/Label.js";
+import "@ui5/webcomponents/dist/ListItemCustom.js";
+import "@ui5/webcomponents/dist/Panel.js";
+import "@ui5/webcomponents/dist/Dialog.js";
+import "@ui5/webcomponents/dist/Popover.js";
+import "@ui5/webcomponents/dist/Tab.js";
+import "@ui5/webcomponents/dist/TabContainer.js";
+import "@ui5/webcomponents/dist/TextArea.js";
+import "@ui5/webcomponents/dist/Switch.js";
+import "@ui5/webcomponents-fiori/dist/ShellBar.js";
+import "@ui5/webcomponents-fiori/dist/ShellBarItem.js";
+import "@ui5/webcomponents-fiori/dist/Assets.js";
 import "@ui5/webcomponents-icons/dist/palette.js";
 import "@ui5/webcomponents-icons/dist/settings.js";
 import "@ui5/webcomponents-icons/dist/sys-help.js";
@@ -119,9 +119,9 @@ function App() {
 		}
 	}, [editDialog]);
 
-	const handleProfileClick = useCallback((event: CustomEvent<ShellBarItemClickEventDetail>) => {
+	const handleProfileClick = useCallback((event: Event) => {
 		if (profilePopover.current) {
-			profilePopover.current.opener = event.detail.targetRef;
+			profilePopover.current.opener = (event as CustomEvent<ShellBarItemClickEventDetail>).detail.targetRef;
 			profilePopover.current.open = true;
 		}
 	}, []);
@@ -138,12 +138,12 @@ function App() {
 		}
 	}, []);
 
-	const handleRtlSwitchChange = useCallback((event: CustomEvent) => {
+	const handleRtlSwitchChange = useCallback((event: Event) => {
 		document.body.dir = (event.target as Switch).checked ? "rtl" : "ltr";
 		applyDirection();
 	}, []);
 
-	const handleContentDensitySwitchChange = useCallback((event: CustomEvent) => {
+	const handleContentDensitySwitchChange = useCallback((event: Event) => {
 		if ((event.target as Switch).checked) {
 			document.body.classList.add("ui5-content-density-compact");
 		} else {
@@ -151,8 +151,8 @@ function App() {
 		}
 	}, []);
 
-	const handleProfileSettingsSelect = useCallback((event: CustomEvent<ListItemClickEventDetail>) => {
-		const selectedKey = event.detail.item.getAttribute("data-key");
+	const handleProfileSettingsSelect = useCallback((event: Event) => {
+		const selectedKey = (event as CustomEvent<ListItemClickEventDetail>).detail.item.getAttribute("data-key");
 		if (selectedKey === "settings") {
 			if (settingsDialog.current) {
 				settingsDialog.current.open = true;
@@ -164,15 +164,15 @@ function App() {
 		}
 	}, []);
 
-	const handleThemeSettingsToggle = useCallback((event: CustomEvent<ShellBarItemClickEventDetail>) => {
+	const handleThemeSettingsToggle = useCallback((event: Event) => {
 		if (themeSettingsPopover.current) {
-			themeSettingsPopover.current.opener = event.detail.targetRef;
+			themeSettingsPopover.current.opener = (event as CustomEvent<ShellBarItemClickEventDetail>).detail.targetRef;
 			themeSettingsPopover.current.open = true;
 		}
 	}, []);
 
-	const handleThemeChange = useCallback((event: CustomEvent<ListSelectionChangeEventDetail>) => {
-		const selectedTheme = event.detail.selectedItems[0].getAttribute("data-theme");
+	const handleThemeChange = useCallback((event: Event) => {
+		const selectedTheme = (event as CustomEvent<ListSelectionChangeEventDetail>).detail.selectedItems[0].getAttribute("data-theme")!;
 		setTheme(selectedTheme);
 	}, []);
 
@@ -196,8 +196,8 @@ function App() {
 	}, [todoBeingEditted, setTodos]);
 
 	const handleDone = useCallback(
-		(event: CustomEvent<ListSelectionChangeEventDetail>) => {
-			const selectedItem = event.detail.selectedItems[0];
+		(event: Event) => {
+			const selectedItem = (event as CustomEvent<ListSelectionChangeEventDetail>).detail.selectedItems[0];
 			const selectedId = selectedItem.getAttribute("data-key");
 
 			setTodos((todos) =>
@@ -210,8 +210,8 @@ function App() {
 	);
 
 	const handleUnDone = useCallback(
-		(event: CustomEvent<ListSelectionChangeEventDetail>) => {
-			const selectedItems = event.detail.selectedItems;
+		(event: Event) => {
+			const selectedItems = (event as CustomEvent<ListSelectionChangeEventDetail>).detail.selectedItems;
 
 			setTodos((todos) =>
 				todos.map((todo) => {
@@ -379,25 +379,25 @@ function App() {
 				<ui5-avatar slot="profile" size="XS" initials="JD"></ui5-avatar>
 			</ui5-shellbar>
 
-			<ui5-tabcontainer fixed collapsed>
+			<ui5-tabcontainer collapsed>
 				<ui5-tab text="My Todos"></ui5-tab>
 			</ui5-tabcontainer>
 
 			<section className="app-content">
 				<div className="create-todo-wrapper">
-					<ui5-input placeholder="Type a task..." ref={todoInput} className="add-todo-element-width" id="add-input"></ui5-input>
-					<ui5-date-picker format-pattern="dd/MM/yyyy" className="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
-					<ui5-button className="add-todo-element-width" ref={addButton} design="Emphasized" id="add-button">
+					<ui5-input placeholder="Type a task..." ref={todoInput} class="add-todo-element-width" id="add-input"></ui5-input>
+					<ui5-date-picker format-pattern="dd/MM/yyyy" class="add-todo-element-width" ref={todoDeadline} id="date-picker"></ui5-date-picker>
+					<ui5-button class="add-todo-element-width" ref={addButton} design="Emphasized" id="add-button">
 						Add Todo
 					</ui5-button>
 				</div>
 
 				<div className="list-todos-wrapper">
-					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter((todo) => !todo.done).length || undefined} className="list-todos-panel">
+					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter((todo) => !todo.done).length || undefined} class="list-todos-panel">
 						<TodoList items={todos.filter((todo) => !todo.done)} selectionChange={handleDone} remove={handleRemove} edit={handleEdit}></TodoList>
 					</ui5-panel>
 
-					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter((todo) => todo.done).length || undefined} className="list-todos-panel" id="completed-tasks">
+					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter((todo) => todo.done).length || undefined} class="list-todos-panel" id="completed-tasks">
 						<TodoList items={todos.filter((todo) => todo.done)} selectionChange={handleUnDone} remove={handleRemove} edit={handleEdit}></TodoList>
 					</ui5-panel>
 				</div>
@@ -407,7 +407,7 @@ function App() {
 				<div className="dialog-content">
 					<div className="edit-wrapper">
 						<ui5-label>Title:</ui5-label>
-						<ui5-textarea className="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
+						<ui5-textarea class="title-textarea" max-length="24" show-exceeded-text value={todoBeingEditted.text} ref={titleEditInput}></ui5-textarea>
 					</div>
 
 					<div className="edit-wrapper date-edit-fields">
@@ -417,19 +417,19 @@ function App() {
 				</div>
 
 				<div className="dialog-footer">
-					<ui5-button className="dialog-footer-btn--cancel" design="Transparent" ref={cancelBtn}>
+					<ui5-button class="dialog-footer-btn--cancel" design="Transparent" ref={cancelBtn}>
 						Cancel
 					</ui5-button>
 					{/*close dialog*/}
-					<ui5-button className="dialog-footer-btn--save" design="Emphasized" ref={saveBtn}>
+					<ui5-button class="dialog-footer-btn--save" design="Emphasized" ref={saveBtn}>
 						Save
 					</ui5-button>
 					{/*save dialog info*/}
 				</div>
 			</ui5-dialog>
 
-			<ui5-popover id="theme-settings-popover" className="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
-				<ui5-list ref={themeSelect} mode="SingleSelect">
+			<ui5-popover ref={themeSettingsPopover} class="app-bar-theming-popover" placement="Bottom" horizontal-align="End" header-text="Theme">
+				<ui5-list ref={themeSelect} selection-mode="Single">
 					<ui5-li icon="palette" data-theme="sap_horizon" selected>
 						SAP Horizon Morning
 					</ui5-li>
@@ -457,7 +457,7 @@ function App() {
 				</ui5-list>
 			</ui5-popover>
 
-			<ui5-popover ref={profilePopover} className="app-bar-profile-popover" placement-type="Bottom" horizontal-align="Right">
+			<ui5-popover ref={profilePopover} class="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
 				<div className="profile-settings">
 					<ui5-avatar size="M" initials="JD"></ui5-avatar>
 					<div className="profile-text">
@@ -467,7 +467,7 @@ function App() {
 				</div>
 
 				<div className="profile-settings-list">
-					<ui5-list mode="SingleSelect" separators="None" ref={profileSettingsSelect}>
+					<ui5-list selection-mode="Single" separators="None" ref={profileSettingsSelect}>
 						<ui5-li icon="settings" data-key="settings">
 							Settings
 						</ui5-li>
@@ -485,7 +485,7 @@ function App() {
 				<div>
 					<div className="profile-rtl-switch centered">
 						<div className="profile-rtl-switch-title">
-							<ui5-label className="profile-rtl-switch-text">RTL</ui5-label>
+							<ui5-label class="profile-rtl-switch-text">RTL</ui5-label>
 						</div>
 						<ui5-switch ref={rtlSwitch}></ui5-switch>
 					</div>
@@ -493,7 +493,7 @@ function App() {
 
 				<div className="profile-rtl-switch centered">
 					<div className="profile-rtl-switch-title">
-						<ui5-label className="profile-rtl-switch-text">Compact</ui5-label>
+						<ui5-label class="profile-rtl-switch-text">Compact</ui5-label>
 					</div>
 					<ui5-switch ref={contentDensitySwitch}></ui5-switch>
 				</div>
