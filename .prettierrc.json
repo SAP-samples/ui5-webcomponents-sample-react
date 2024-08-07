@@ -6,9 +6,9 @@
 	"useTabs": true,
 	"overrides": [
 		{
-			"files": ["*.yaml", "*.yml", "*.md", "*.json", "*.xml", "*.properties"],
+			"files": ["*.yaml", "*.yml", "*.md", "*.json", "*.xml", "*.properties", "*.ts", "*.tsx"],
 			"options": {
-				"useTabs": false,
+				"useTabs": true,
 				"tabWidth": 2,
 				"keySeparator": "=",
 				"xmlWhitespaceSensitivity": "ignore"
