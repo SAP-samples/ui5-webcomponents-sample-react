@@ -37,12 +37,10 @@ import "@ui5/webcomponents-icons/dist/globe.js";
 import type Button from "@ui5/webcomponents/dist/Button";
 import type Input from "@ui5/webcomponents/dist/Input";
 import type DatePicker from "@ui5/webcomponents/dist/DatePicker";
-import type Dialog from "@ui5/webcomponents/dist/Dialog";
 import type TextArea from "@ui5/webcomponents/dist/TextArea";
 import type List from "@ui5/webcomponents/dist/List";
 import type ShellBar from "@ui5/webcomponents-fiori/dist/ShellBar";
 import type Switch from "@ui5/webcomponents/dist/Switch";
-import type Popover from "@ui5/webcomponents/dist/Popover";
 import type ShellBarItem from "@ui5/webcomponents-fiori/dist/ShellBarItem";
 import { ListItemClickEventDetail, ListSelectionChangeEventDetail } from "@ui5/webcomponents/dist/List";
 import { ShellBarItemClickEventDetail } from "@ui5/webcomponents-fiori/dist/ShellBarItem";
@@ -88,12 +86,18 @@ function App() {
 		text: "",
 		deadline: "",
 	});
+	const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+	const [helpDialogOpen, setHelpDialogOpen] = useState(false);
+	const [editDialogOpen, setEditDialogOpen] = useState(false);
+	const [profilePopoverOpen, setProfilePopoverOpen] = useState(false);
+	const [profilePopoverOpener, setProfilePopoverOpener] = useState<HTMLElement | undefined>();
+	const [themeSettingsPopoverOpen, setThemeSettingsPopoverOpen] = useState(false);
+	const [themeSettingsPopoverOpener, setThemeSettingsPopoverOpener] = useState<HTMLElement | undefined>();
 
 	const themeChangeItem = useRef<ShellBarItem>(),
 		addButton = useRef<Button>(),
 		todoInput = useRef<Input>(),
 		todoDeadline = useRef<DatePicker>(),
-		editDialog = useRef<Dialog>(),
 		cancelBtn = useRef<Button>(),
 		saveBtn = useRef<Button>(),
 		titleEditInput = useRef<TextArea>(),
@@ -104,35 +108,23 @@ function App() {
 		dialogButton = useRef<Button>(),
 		dialogHelpCloseButton = useRef<Button>(),
 		rtlSwitch = useRef<Switch>(),
-		contentDensitySwitch = useRef<Switch>(),
-		profilePopover = useRef<Popover>(),
-		settingsDialog = useRef<Dialog>(),
-		helpDialog = useRef<Dialog>(),
-		themeSettingsPopover = useRef<Popover>();
+		contentDensitySwitch = useRef<Switch>();
 
 	const handleCancel = useCallback(() => {
-		if (editDialog.current) {
-			editDialog.current.open = false;
-		}
-	}, [editDialog]);
+		setEditDialogOpen(false);
+	}, []);
 
 	const handleProfileClick = useCallback((event: CustomEvent<ShellBarProfileClickEventDetail>) => {
-		if (profilePopover.current) {
-			profilePopover.current.opener = event.detail.targetRef;
-			profilePopover.current.open = true;
-		}
+		setProfilePopoverOpen(true);
+		setProfilePopoverOpener(event.detail.targetRef);
 	}, []);
 
 	const handleSettingsDialogCloseButtonClick = useCallback(() => {
-		if (settingsDialog.current) {
-			settingsDialog.current.open = false;
-		}
+		setSettingsDialogOpen(false);
 	}, []);
 
 	const handleHelpDialogCloseButtonClick = useCallback(() => {
-		if (helpDialog.current) {
-			helpDialog.current.open = false;
-		}
+		setHelpDialogOpen(false);
 	}, []);
 
 	const handleRtlSwitchChange = useCallback((event: CustomEvent) => {
@@ -151,21 +143,15 @@ function App() {
 	const handleProfileSettingsSelect = useCallback((event: CustomEvent<ListItemClickEventDetail>) => {
 		const selectedKey = event.detail.item.getAttribute("data-key");
 		if (selectedKey === "settings") {
-			if (settingsDialog.current) {
-				settingsDialog.current.open = true;
-			}
+			setSettingsDialogOpen(true);
 		} else if (selectedKey === "help") {
-			if (helpDialog.current) {
-				helpDialog.current.open = true;
-			}
+			setHelpDialogOpen(true);
 		}
 	}, []);
 
 	const handleThemeSettingsToggle = useCallback((event: CustomEvent<ShellBarItemClickEventDetail>) => {
-		if (themeSettingsPopover.current) {
-			themeSettingsPopover.current.opener = event.detail.targetRef;
-			themeSettingsPopover.current.open = true;
-		}
+		setThemeSettingsPopoverOpen(true);
+		setThemeSettingsPopoverOpener(event.detail.targetRef);
 	}, []);
 
 	const handleThemeChange = useCallback((event: CustomEvent<ListSelectionChangeEventDetail>) => {
@@ -187,9 +173,7 @@ function App() {
 			})
 		);
 
-		if (editDialog.current) {
-			editDialog.current.open = false;
-		}
+		setEditDialogOpen(false);
 	}, [todoBeingEditted, setTodos]);
 
 	const handleDone = useCallback(
@@ -252,9 +236,7 @@ function App() {
 				deadline: todoObj.deadline,
 			});
 
-			if (editDialog.current) {
-				editDialog.current.open = true;
-			}
+			setEditDialogOpen(true);
 		},
 		[todos, setTodoBeingEditted]
 	);
@@ -399,7 +381,7 @@ function App() {
 				</div>
 			</section>
 
-			<ui5-dialog header-text="Edit Todo" ref={editDialog}>
+			<ui5-dialog header-text="Edit Todo" open={editDialogOpen || undefined}>
 				<div className="dialog-content">
 					<div className="edit-wrapper">
 						<ui5-label>Title:</ui5-label>
@@ -424,7 +406,7 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-popover ref={themeSettingsPopover} class="app-bar-theming-popover" placement="Bottom" horizontal-align="End" header-text="Theme">
+			<ui5-popover open={themeSettingsPopoverOpen || undefined} opener={themeSettingsPopoverOpener} class="app-bar-theming-popover" placement="Bottom" horizontal-align="End" header-text="Theme">
 				<ui5-list ref={themeSelect} selection-mode="Single">
 					<ui5-li icon="palette" data-theme="sap_horizon" selected>
 						SAP Horizon Morning
@@ -453,7 +435,7 @@ function App() {
 				</ui5-list>
 			</ui5-popover>
 
-			<ui5-popover ref={profilePopover} class="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
+			<ui5-popover open={profilePopoverOpen || undefined} opener={profilePopoverOpener} class="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
 				<div className="profile-settings">
 					<ui5-avatar size="M" initials="JD"></ui5-avatar>
 					<div className="profile-text">
@@ -477,7 +459,7 @@ function App() {
 				</div>
 			</ui5-popover>
 
-			<ui5-dialog ref={settingsDialog} header-text="Profile Settings" draggable>
+			<ui5-dialog open={settingsDialogOpen || undefined} header-text="Profile Settings" draggable>
 				<div>
 					<div className="profile-rtl-switch centered">
 						<div className="profile-rtl-switch-title">
@@ -501,7 +483,7 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-dialog ref={helpDialog} header-text="" prevent-initial-focus>
+			<ui5-dialog open={helpDialogOpen || undefined} header-text="" prevent-initial-focus>
 				<div slot="header" className="help-header" id="header-title-align">
 					<ui5-icon name="sys-help"></ui5-icon>
 					Help
