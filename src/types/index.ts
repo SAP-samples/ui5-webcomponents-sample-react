@@ -1,4 +1,4 @@
-import type { DOMAttributes, useRef, Key } from "react";
+import type { useRef, Key } from "react";
 import type Dialog from "@ui5/webcomponents/dist/Dialog";
 import type Input from "@ui5/webcomponents/dist/Input";
 import type Text from "@ui5/webcomponents/dist/Text";
@@ -25,9 +25,17 @@ import type ShellBar from "@ui5/webcomponents-fiori/dist/ShellBar";
 import type ShellBarItem from "@ui5/webcomponents-fiori/dist/ShellBarItem";
 import type Icon from "@ui5/webcomponents/dist/Icon";
 
+type CamelToKebab<S extends string> = S extends `${infer T}${infer U}`
+  ? `${T extends Lowercase<T> ? '' : '-'}${Lowercase<T>}${CamelToKebab<U>}`
+  : S;
+
+type CamelCaseToKebabCase<T> = {
+  [K in keyof T as CamelToKebab<Extract<K, string>>]: T[K];
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type CustomElement<T> = Partial<T & CustomElementAttrs<T> & { children: any }>;
-type CustomElementAttrs<T> = DOMAttributes<T> & { key: Key; ref: ReturnType<typeof useRef<T>>; class: string };
+type CustomElement<T> = Partial<CustomElementAttrs<T> & { children: any }>;
+type CustomElementAttrs<T> = CamelCaseToKebabCase<T> & { key: Key; ref: ReturnType<typeof useRef<T>>; class: string };
 
 declare global {
 	namespace JSX {
