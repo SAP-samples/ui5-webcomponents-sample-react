@@ -13,6 +13,7 @@ import "@ui5/webcomponents/dist/Title";
 import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
 import "@ui5/webcomponents/dist/List";
+import "@ui5/webcomponents/dist/Link";
 import "@ui5/webcomponents/dist/Label";
 import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Dialog";
@@ -500,7 +501,7 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-dialog ref={helpDialog} header-text="">
+			<ui5-dialog ref={helpDialog} header-text="" prevent-initial-focus>
 				<div slot="header" className="help-header" id="header-title-align">
 					<ui5-icon name="sys-help"></ui5-icon>
 					Help
@@ -521,9 +522,9 @@ function App() {
 					<b>Admin version</b>: React Admin <br></br>
 					<hr></hr>
 					For more information, please visit our{" "}
-					<a href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target="_blank">
+					<ui5-link href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target="_blank">
 						documentation
-					</a>
+					</ui5-link>
 					.
 				</p>
 

@@ -19,6 +19,7 @@ import type Popover from "@ui5/webcomponents/dist/Popover";
 import type Title from "@ui5/webcomponents/dist/Title";
 import type List from "@ui5/webcomponents/dist/List";
 import type ListItemCustom from "@ui5/webcomponents/dist/ListItemCustom";
+import type Link from "@ui5/webcomponents/dist/Link";
 import type StandardListItem from "@ui5/webcomponents/dist/ListItemStandard";
 import type ShellBar from "@ui5/webcomponents-fiori/dist/ShellBar";
 import type ShellBarItem from "@ui5/webcomponents-fiori/dist/ShellBarItem";
@@ -41,6 +42,7 @@ declare global {
 			["ui5-list"]: CustomElement<List>;
 			["ui5-li"]: CustomElement<StandardListItem>;
 			["ui5-li-custom"]: CustomElement<ListItemCustom>;
+			["ui5-link"]: CustomElement<Link>;
 			["ui5-popover"]: CustomElement<Popover>;
 			["ui5-panel"]: CustomElement<Panel>;
 			["ui5-avatar"]: CustomElement<Avatar>;
