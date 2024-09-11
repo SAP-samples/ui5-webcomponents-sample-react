@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import logo from "./logo.png";
 import "./App.css";
-import TodoList from "./TodoList";
-import applyDirection from "@ui5/webcomponents-base/dist/locale/applyDirection.js";
+import TodoList from "./components/TodoList";
 
+import { TodoItem, EditingTodoItem } from "./types";
+
+import applyDirection from "@ui5/webcomponents-base/dist/locale/applyDirection.js";
 import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme";
 import "@ui5/webcomponents-base/dist/features/F6Navigation";
 import "@ui5/webcomponents/dist/Button";
@@ -12,7 +14,6 @@ import "@ui5/webcomponents/dist/Input";
 import "@ui5/webcomponents/dist/DatePicker";
 import "@ui5/webcomponents/dist/List";
 import "@ui5/webcomponents/dist/Label";
-import "@ui5/webcomponents/dist/CustomListItem";
 import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Dialog";
 import "@ui5/webcomponents/dist/Popover";
@@ -32,9 +33,24 @@ import "@ui5/webcomponents-icons/dist/private.js";
 import "@ui5/webcomponents-icons/dist/loan.js";
 import "@ui5/webcomponents-icons/dist/globe.js";
 
+import type Button from "@ui5/webcomponents/dist/Button";
+import type Input from "@ui5/webcomponents/dist/Input";
+import type DatePicker from "@ui5/webcomponents/dist/DatePicker";
+import type Dialog from "@ui5/webcomponents/dist/Dialog";
+import type TextArea from "@ui5/webcomponents/dist/TextArea";
+import type List from "@ui5/webcomponents/dist/List";
+import type ShellBar from "@ui5/webcomponents-fiori/dist/ShellBar";
+import type Switch from "@ui5/webcomponents/dist/Switch";
+import type Popover from "@ui5/webcomponents/dist/Popover";
+import type ShellBarItem from "@ui5/webcomponents-fiori/dist/ShellBarItem";
+import { ListItemClickEventDetail, ListSelectionChangeEventDetail } from "@ui5/webcomponents/dist/List";
+import { ShellBarItemClickEventDetail } from "@ui5/webcomponents-fiori/dist/ShellBarItem";
+import { ShellBarProfileClickEventDetail } from "@ui5/webcomponents-fiori/dist/ShellBar";
+
 setTheme("sap_horizon");
+
 function App() {
-	const [todos, setTodos] = useState([
+	const [todos, setTodos] = useState<TodoItem[]>([
 		{
 			text: "Get some carrots",
 			id: 1,
@@ -66,79 +82,99 @@ function App() {
 			done: true,
 		},
 	]);
-	const [todoBeingEditted, setTodoBeingEditted] = useState({
-		id: "",
+	const [todoBeingEditted, setTodoBeingEditted] = useState<EditingTodoItem>({
+		id: -1,
 		text: "",
-		date: "",
+		deadline: "",
 	});
 
-	const themeChangeItem = useRef(),
-		addButton = useRef(),
-		todoInput = useRef(),
-		todoDeadline = useRef(),
-		editDialog = useRef(),
-		cancelBtn = useRef(),
-		saveBtn = useRef(),
-		titleEditInput = useRef(),
-		dateEditInput = useRef(),
-		themeSelect = useRef(),
-		shellBar = useRef(),
-		profileSettingsSelect = useRef(),
-		dialogButton = useRef(),
-		dialogHelpCloseButton = useRef(),
-		rtlSwitch = useRef(),
-		contentDensitySwitch = useRef();
+	const themeChangeItem = useRef<ShellBarItem>(),
+		addButton = useRef<Button>(),
+		todoInput = useRef<Input>(),
+		todoDeadline = useRef<DatePicker>(),
+		editDialog = useRef<Dialog>(),
+		cancelBtn = useRef<Button>(),
+		saveBtn = useRef<Button>(),
+		titleEditInput = useRef<TextArea>(),
+		dateEditInput = useRef<DatePicker>(),
+		themeSelect = useRef<List>(),
+		shellBar = useRef<ShellBar>(),
+		profileSettingsSelect = useRef<List>(),
+		dialogButton = useRef<Button>(),
+		dialogHelpCloseButton = useRef<Button>(),
+		rtlSwitch = useRef<Switch>(),
+		contentDensitySwitch = useRef<Switch>(),
+		profilePopover = useRef<Popover>(),
+		settingsDialog = useRef<Dialog>(),
+		helpDialog = useRef<Dialog>(),
+		themeSettingsPopover = useRef<Popover>();
 
-	function handleCancel() {
-		editDialog.current.close();
-	}
+	const handleCancel = useCallback(() => {
+		if (editDialog.current) {
+			editDialog.current.open = false;
+		}
+	}, [editDialog]);
 
-	const handleProfileClick = useCallback((event) => {
-		window["profile-pop"].showAt(event.detail.targetRef);
+	const handleProfileClick = useCallback((event: CustomEvent<ShellBarProfileClickEventDetail>) => {
+		if (profilePopover.current) {
+			profilePopover.current.opener = event.detail.targetRef;
+			profilePopover.current.open = true;
+		}
 	}, []);
 
 	const handleSettingsDialogCloseButtonClick = useCallback(() => {
-		window["settings-dialog"].close();
+		if (settingsDialog.current) {
+			settingsDialog.current.open = false;
+		}
 	}, []);
 
 	const handleHelpDialogCloseButtonClick = useCallback(() => {
-		window["help-dialog"].close();
+		if (helpDialog.current) {
+			helpDialog.current.open = false;
+		}
 	}, []);
 
-	const handleRtlSwitchChange = useCallback((event) => {
-		document.body.dir = event.target.checked ? "rtl" : "ltr";
+	const handleRtlSwitchChange = useCallback((event: CustomEvent) => {
+		document.body.dir = (event.target as Switch).checked ? "rtl" : "ltr";
 		applyDirection();
 	}, []);
 
-	const handleContentDensitySwitchChange = useCallback((event) => {
-		if (event.target.checked) {
+	const handleContentDensitySwitchChange = useCallback((event: CustomEvent) => {
+		if ((event.target as Switch).checked) {
 			document.body.classList.add("ui5-content-density-compact");
 		} else {
 			document.body.classList.remove("ui5-content-density-compact");
 		}
 	}, []);
 
-	const handleProfileSettingsSelect = useCallback((event) => {
+	const handleProfileSettingsSelect = useCallback((event: CustomEvent<ListItemClickEventDetail>) => {
 		const selectedKey = event.detail.item.getAttribute("data-key");
 		if (selectedKey === "settings") {
-			window["settings-dialog"].show(event.detail.targetRef);
+			if (settingsDialog.current) {
+				settingsDialog.current.open = true;
+			}
 		} else if (selectedKey === "help") {
-			window["help-dialog"].show(event.detail.targetRef);
+			if (helpDialog.current) {
+				helpDialog.current.open = true;
+			}
 		}
 	}, []);
 
-	const handleThemeSettingsToggle = useCallback((event) => {
-		window["theme-settings-popover"].showAt(event.detail.targetRef);
+	const handleThemeSettingsToggle = useCallback((event: CustomEvent<ShellBarItemClickEventDetail>) => {
+		if (themeSettingsPopover.current) {
+			themeSettingsPopover.current.opener = event.detail.targetRef;
+			themeSettingsPopover.current.open = true;
+		}
 	}, []);
 
-	const handleThemeChange = useCallback((event) => {
-		const selectedTheme = event.detail.selectedItems[0].getAttribute("data-theme");
+	const handleThemeChange = useCallback((event: CustomEvent<ListSelectionChangeEventDetail>) => {
+		const selectedTheme = event.detail.selectedItems[0].getAttribute("data-theme")!;
 		setTheme(selectedTheme);
 	}, []);
 
 	const handleSave = useCallback(() => {
-		const edittedText = titleEditInput.current.value;
-		const edittedDate = dateEditInput.current.value;
+		const edittedText = titleEditInput.current?.value || "";
+		const edittedDate = dateEditInput.current?.value || "";
 
 		setTodos((todos) =>
 			todos.map((todo) => {
@@ -150,11 +186,13 @@ function App() {
 			})
 		);
 
-		editDialog.current.close();
+		if (editDialog.current) {
+			editDialog.current.open = false;
+		}
 	}, [todoBeingEditted, setTodos]);
 
 	const handleDone = useCallback(
-		(event) => {
+		(event: CustomEvent<ListSelectionChangeEventDetail>) => {
 			const selectedItem = event.detail.selectedItems[0];
 			const selectedId = selectedItem.getAttribute("data-key");
 
@@ -168,7 +206,7 @@ function App() {
 	);
 
 	const handleUnDone = useCallback(
-		(event) => {
+		(event: CustomEvent<ListSelectionChangeEventDetail>) => {
 			const selectedItems = event.detail.selectedItems;
 
 			setTodos((todos) =>
@@ -186,119 +224,145 @@ function App() {
 		setTodos((todos) => [
 			...todos,
 			{
-				text: todoInput.current.value,
+				text: todoInput.current?.value || "",
 				id: todos.length + 1,
-				deadline: todoDeadline.current.value,
+				deadline: todoDeadline.current?.value || "",
 				done: false,
 			},
 		]);
 	}, [setTodos]);
 
 	const handleRemove = useCallback(
-		(id) => {
+		(id: number) => {
 			setTodos((todos) => todos.filter((todo) => todo.id !== id));
 		},
 		[setTodos]
 	);
 
 	const handleEdit = useCallback(
-		(id) => {
+		(id: number) => {
 			const todoObj = todos.filter((todo) => {
 				return todo.id === id;
 			})[0];
 
-			setTodoBeingEditted(() => ({
+			setTodoBeingEditted({
 				id: id,
 				text: todoObj.text,
 				deadline: todoObj.deadline,
-			}));
+			});
 
-			editDialog.current.show();
+			if (editDialog.current) {
+				editDialog.current.open = true;
+			}
 		},
 		[todos, setTodoBeingEditted]
 	);
 
 	useEffect(() => {
-		todoInput.current.addEventListener("submit", handleAdd);
+		const currentTodoInput = todoInput.current;
+
+		currentTodoInput?.addEventListener("submit", handleAdd);
 		return () => {
-			todoInput.current.removeEventListener("submit", handleAdd);
+			currentTodoInput?.removeEventListener("submit", handleAdd);
 		};
 	}, [handleAdd]);
 
 	useEffect(() => {
-		profileSettingsSelect.current.addEventListener("item-click", handleProfileSettingsSelect);
+		const currentProfileSettingsSelect = profileSettingsSelect.current;
+
+		currentProfileSettingsSelect?.addEventListener("item-click", handleProfileSettingsSelect as EventListener);
 		return () => {
-			profileSettingsSelect.current.removeEventListener("item-click", handleProfileSettingsSelect);
+			currentProfileSettingsSelect?.removeEventListener("item-click", handleProfileSettingsSelect as EventListener);
 		};
 	}, [handleProfileSettingsSelect]);
 
 	useEffect(() => {
-		addButton.current.addEventListener("click", handleAdd);
+		const curretnAddButton = addButton.current;
+
+		curretnAddButton?.addEventListener("click", handleAdd);
 		return () => {
-			addButton.current.removeEventListener("click", handleAdd);
+			curretnAddButton?.removeEventListener("click", handleAdd);
 		};
 	}, [handleAdd]);
 
 	useEffect(() => {
-		cancelBtn.current.addEventListener("click", handleCancel);
+		const currentCancelBtn = cancelBtn.current;
+
+		currentCancelBtn?.addEventListener("click", handleCancel);
 		return () => {
-			cancelBtn.current.removeEventListener("click", handleCancel);
+			currentCancelBtn?.removeEventListener("click", handleCancel);
 		};
 	}, [handleCancel]);
 
 	useEffect(() => {
-		saveBtn.current.addEventListener("click", handleSave);
+		const currentSaveBtn = saveBtn.current;
+
+		currentSaveBtn?.addEventListener("click", handleSave);
 		return () => {
-			saveBtn.current.removeEventListener("click", handleSave);
+			currentSaveBtn?.removeEventListener("click", handleSave);
 		};
 	}, [handleSave]);
 
 	useEffect(() => {
-		themeChangeItem.current.addEventListener("click", handleThemeSettingsToggle);
+		const currentThemeChangeItem = themeChangeItem.current;
+
+		currentThemeChangeItem?.addEventListener("click", handleThemeSettingsToggle as EventListener);
 		return () => {
-			themeChangeItem.current.removeEventListener("click", handleThemeSettingsToggle);
+			currentThemeChangeItem?.removeEventListener("click", handleThemeSettingsToggle as EventListener);
 		};
 	}, [handleThemeSettingsToggle]);
 
 	useEffect(() => {
-		themeSelect.current.addEventListener("selection-change", handleThemeChange);
+		const currentThemeSelect = themeSelect.current;
+
+		currentThemeSelect?.addEventListener("selection-change", handleThemeChange as EventListener);
 		return () => {
-			themeSelect.current.removeEventListener("selection-change", handleThemeChange);
+			currentThemeSelect?.removeEventListener("selection-change", handleThemeChange as EventListener);
 		};
 	}, [handleThemeChange]);
 
 	useEffect(() => {
-		shellBar.current.addEventListener("profile-click", handleProfileClick);
+		const currentShellBar = shellBar.current;
+
+		currentShellBar?.addEventListener("profile-click", handleProfileClick as EventListener);
 		return () => {
-			shellBar.current.removeEventListener("profile-click", handleProfileClick);
+			currentShellBar?.removeEventListener("profile-click", handleProfileClick as EventListener);
 		};
 	}, [handleProfileClick]);
 
 	useEffect(() => {
-		dialogButton.current.addEventListener("click", handleSettingsDialogCloseButtonClick);
+		const currentDialogButton = dialogButton.current;
+
+		currentDialogButton?.addEventListener("click", handleSettingsDialogCloseButtonClick);
 		return () => {
-			dialogButton.current.removeEventListener("click", handleSettingsDialogCloseButtonClick);
+			currentDialogButton?.removeEventListener("click", handleSettingsDialogCloseButtonClick);
 		};
 	}, [handleSettingsDialogCloseButtonClick]);
 
 	useEffect(() => {
-		dialogHelpCloseButton.current.addEventListener("click", handleHelpDialogCloseButtonClick);
+		const currentDialogHelpCloseButton = dialogHelpCloseButton.current;
+
+		currentDialogHelpCloseButton?.addEventListener("click", handleHelpDialogCloseButtonClick);
 		return () => {
-			dialogHelpCloseButton.current.removeEventListener("click", handleHelpDialogCloseButtonClick);
+			currentDialogHelpCloseButton?.removeEventListener("click", handleHelpDialogCloseButtonClick);
 		};
 	}, [handleHelpDialogCloseButtonClick]);
 
 	useEffect(() => {
-		rtlSwitch.current.addEventListener("change", handleRtlSwitchChange);
+		const currentRtlSwitch = rtlSwitch.current;
+
+		currentRtlSwitch?.addEventListener("change", handleRtlSwitchChange as EventListener);
 		return () => {
-			rtlSwitch.current.removeEventListener("change", handleRtlSwitchChange);
+			currentRtlSwitch?.removeEventListener("change", handleRtlSwitchChange as EventListener);
 		};
 	}, [handleRtlSwitchChange]);
 
 	useEffect(() => {
-		contentDensitySwitch.current.addEventListener("change", handleContentDensitySwitchChange);
+		const currentContentDensitySwitch = contentDensitySwitch.current;
+
+		currentContentDensitySwitch?.addEventListener("change", handleContentDensitySwitchChange as EventListener);
 		return () => {
-			contentDensitySwitch.current.removeEventListener("change", handleContentDensitySwitchChange);
+			currentContentDensitySwitch?.removeEventListener("change", handleContentDensitySwitchChange as EventListener);
 		};
 	}, [handleContentDensitySwitchChange]);
 
@@ -310,7 +374,7 @@ function App() {
 				<ui5-avatar slot="profile" size="XS" initials="JD"></ui5-avatar>
 			</ui5-shellbar>
 
-			<ui5-tabcontainer fixed collapsed>
+			<ui5-tabcontainer collapsed>
 				<ui5-tab text="My Todos"></ui5-tab>
 			</ui5-tabcontainer>
 
@@ -325,11 +389,11 @@ function App() {
 
 				<div className="list-todos-wrapper">
 					<ui5-panel header-text="Incompleted Tasks" collapsed={!todos.filter((todo) => !todo.done).length || undefined} className="list-todos-panel">
-						<TodoList items={todos.filter((todo) => !todo.done)} selectionChange={handleDone} remove={handleRemove} edit={handleEdit}></TodoList>
+						<TodoList items={todos.filter((todo) => !todo.done)} handleSelectionChange={handleDone} handleDelete={handleRemove} handleEdit={handleEdit}></TodoList>
 					</ui5-panel>
 
 					<ui5-panel header-text="Completed Tasks" collapsed={!todos.filter((todo) => todo.done).length || undefined} className="list-todos-panel" id="completed-tasks">
-						<TodoList items={todos.filter((todo) => todo.done)} selectionChange={handleUnDone} remove={handleRemove} edit={handleEdit}></TodoList>
+						<TodoList items={todos.filter((todo) => todo.done)} handleSelectionChange={handleUnDone} handleDelete={handleRemove} handleEdit={handleEdit}></TodoList>
 					</ui5-panel>
 				</div>
 			</section>
@@ -359,8 +423,8 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-popover id="theme-settings-popover" className="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
-				<ui5-list ref={themeSelect} mode="SingleSelect">
+			<ui5-popover ref={themeSettingsPopover} className="app-bar-theming-popover" placement="Bottom" horizontal-align="End" header-text="Theme">
+				<ui5-list ref={themeSelect} selection-mode="Single">
 					<ui5-li icon="palette" data-theme="sap_horizon" selected>
 						SAP Horizon Morning
 					</ui5-li>
@@ -388,7 +452,7 @@ function App() {
 				</ui5-list>
 			</ui5-popover>
 
-			<ui5-popover id="profile-pop" className="app-bar-profile-popover" placement-type="Bottom" horizontal-align="Right">
+			<ui5-popover ref={profilePopover} className="app-bar-profile-popover" placement="Bottom" horizontal-align="End">
 				<div className="profile-settings">
 					<ui5-avatar size="M" initials="JD"></ui5-avatar>
 					<div className="profile-text">
@@ -398,7 +462,7 @@ function App() {
 				</div>
 
 				<div className="profile-settings-list">
-					<ui5-list mode="SingleSelect" separators="None" ref={profileSettingsSelect}>
+					<ui5-list selection-mode="Single" separators="None" ref={profileSettingsSelect}>
 						<ui5-li icon="settings" data-key="settings">
 							Settings
 						</ui5-li>
@@ -412,7 +476,7 @@ function App() {
 				</div>
 			</ui5-popover>
 
-			<ui5-dialog id="settings-dialog" header-text="Profile Settings" draggable>
+			<ui5-dialog ref={settingsDialog} header-text="Profile Settings" draggable>
 				<div>
 					<div className="profile-rtl-switch centered">
 						<div className="profile-rtl-switch-title">
@@ -436,7 +500,7 @@ function App() {
 				</div>
 			</ui5-dialog>
 
-			<ui5-dialog id="help-dialog" header-text="">
+			<ui5-dialog ref={helpDialog} header-text="">
 				<div slot="header" className="help-header" id="header-title-align">
 					<ui5-icon name="sys-help"></ui5-icon>
 					Help
@@ -457,7 +521,7 @@ function App() {
 					<b>Admin version</b>: React Admin <br></br>
 					<hr></hr>
 					For more information, please visit our{" "}
-					<a href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target={"_blank"}>
+					<a href="https://github.com/SAP-samples/ui5-webcomponents-sample-react" target="_blank">
 						documentation
 					</a>
 					.
